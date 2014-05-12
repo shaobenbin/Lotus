@@ -4,7 +4,7 @@ var express = require('express'),
     appPath = process.cwd();
 
 var mean = require('meanio');
-mean.app('Mean Demo App', {});
+mean.app('莲藕项目', {});
 
 module.exports = function(passport, db) {
 

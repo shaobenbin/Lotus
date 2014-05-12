@@ -8,16 +8,18 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 /**
+ * 用户模型
  * User Schema
  */
 var UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: String,
     username: {
-        type: String,
+        type: String
+        ,
+        unique: true
+    },
+    email: {
+        type: String
+        ,
         unique: true
     },
     roles: [{
@@ -46,6 +48,7 @@ UserSchema.virtual('password').set(function(password) {
 });
 
 /**
+ * 验证
  * Validations
  */
 var validatePresenceOf = function(value) {
@@ -53,11 +56,11 @@ var validatePresenceOf = function(value) {
 };
 
 // The 4 validations below only apply if you are signing up traditionally.
-UserSchema.path('name').validate(function(name) {
-    // If you are authenticating by any of the oauth strategies, don't validate.
-    if (!this.provider) return true;
-    return (typeof name === 'string' && name.length > 0);
-}, 'Name cannot be blank');
+//UserSchema.path('name').validate(function(name) {
+//    // If you are authenticating by any of the oauth strategies, don't validate.
+//    if (!this.provider) return true;
+//    return (typeof name === 'string' && name.length > 0);
+//}, 'Name cannot be blank');
 
 UserSchema.path('email').validate(function(email) {
     // If you are authenticating by any of the oauth strategies, don't validate.
@@ -79,6 +82,7 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
 
 
 /**
+ * 预保存钩子
  * Pre-save hook
  */
 UserSchema.pre('save', function(next) {
@@ -91,11 +95,13 @@ UserSchema.pre('save', function(next) {
 });
 
 /**
- * Methods
+ * 方法
+ * Methods - assign a function to the "methods" object of our animalSchema.
  */
 UserSchema.methods = {
 
     /**
+     * 是否属于某角色 - 检测用户是否属于某用户组
      * HasRole - check if the user has required role
      *
      * @param {String} plainText
@@ -107,6 +113,7 @@ UserSchema.methods = {
         return (roles.indexOf('admin') !== -1 || roles.indexOf(role) !== -1);
     },
     /**
+     * 验证 - 检测两次输入密码是否相同
      * Authenticate - check if the passwords are the same
      *
      * @param {String} plainText
@@ -118,6 +125,7 @@ UserSchema.methods = {
     },
 
     /**
+     * 加盐
      * Make salt
      *
      * @return {String}
@@ -128,6 +136,7 @@ UserSchema.methods = {
     },
 
     /**
+     * 加密密码
      * Hash password
      *
      * @param {String} password
@@ -141,4 +150,6 @@ UserSchema.methods = {
     }
 };
 
+// To use our schema definition, we need to convert our blogSchema into a Model we can work with.
 mongoose.model('User', UserSchema);
+// ready to go!

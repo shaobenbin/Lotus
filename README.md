@@ -1,24 +1,226 @@
-# [![MEAN Logo](http://www.mean.io/img/logos/meanlogo.png)](http://mean.io/) MEAN Stack
+# 莲藕项目
 
-[![Build Status](https://travis-ci.org/linnovate/mean.png?branch=master)](https://travis-ci.org/linnovate/mean)
-[![Dependencies Status](https://david-dm.org/linnovate/mean.png)](https://david-dm.org/linnovate/mean)
+定义数据结构
+```
+"users" :
+{
+    "_id" : ObjectId( "53575cf30c9b1d015a9fb8a5" ),
+    "provider" : "",
+    "email" : "",
+    "hashed_password" : "",
+    "salt" : "",
+    "username" : "",
+    "create_data": "",
+    "is_locked_out": "",
+    "is_hint_enabled": "",
+    "last_login_date": "",
+    "incorrect_login_attempt":"",
+    "realname": ""
+    "name" : "",
+    "roles" : [
+        "authenticated"
+    ],
+    "__v" : 0
+}
 
-MEAN is a boilerplate that provides a nice starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you quick and organized way to start developing of MEAN based web apps with useful modules like mongoose and passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.  
+"company" :
+{
+    "_id" : "",
+    "name" : "公司名称",
+    "description" : "公司描述",
+    "logo_url" : "公司URL",
+    "user_id" : "1"
 
-## Prerequisites
-* Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
-* MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - Make sure it's running on the default port (27017).
+}
 
-### Tools Prerequisites
-* NPM - Node.js package manager, should be installed when you install node.js.
-* Bower - Web package manager, installing [Bower](http://bower.io/) is simple when you have npm:
+"productline":{
+        "_id":  "",
+        "name": "",
+        "project_num": "",
+        "user_id": ""
+        "campany": ""
+        "porjects": [
+            {
+                "_id": "",
+                "version" : "",
+                "name" : "",
+                "create_data" : "",
+                "user_id" : "",
+                "description" : "",
+                "stage" : "",
+                "project_data" : "",
+                "related_ids" : "",
+                "group_id" : "",
+                "update_time" : ""
+            },
+            {
+                "_id": "",
+                "version" : "",
+                "name" : "",
+                "create_data" : "",
+                "user_id" : "",
+                "description" : "",
+                "stage" : "",
+                "project_data" : "",
+                "related_ids" : "",
+                "group_id" : "",
+                "update_time" : ""
+            }
+        ]
+    }
+
+
+"module": {
+    "_id" : "",
+    "project_id" : "",
+    "name" : "",
+    "description : "",
+    "page": {
+        "_id" : "",
+        "name" : "",
+        "module_id" : "",
+        "description" : "",
+        "template" : ""
+        "action" :[{
+                    "_id" : "",
+                    "name" : "",
+                    "description" : "",
+                    "request_type" : "",
+                    "request_url" : "",
+                    "map_url": "",
+                    "request_parameter": {
+                          "_id" : "",
+                          "name" : "",
+                          "identifier" : "",
+                          "data_type" : "",
+                          "remark" : "",
+                          "expression" : "",
+                          "mock_data" : "",
+
+                      }
+                    "response_parameter" : {
+                          "_id" : "",
+                          "name" : "",
+                          "identifier" : "",
+                          "data_type" : "",
+                          "remark" : "",
+                          "expression" : "",
+                          "mock_data" : "",
+                      }
+                },
+                 {
+                    "_id" : "",
+                    "name" : "",
+                    "description" : "",
+                    "request_type" : "",
+                    "request_url" : "",
+                    "response_template" : "",
+                        "request_parameter_list": [{
+                              "_id" : "",
+                              "name" : "",
+                              "identifier" : "",
+                              "data_type" : "",
+                              "remark" : "",
+                              "expression" : "",
+                              "mock_data" : "",
+
+                          }],
+                        "response_parameter_list" : [{
+                              "_id" : "",
+                              "name" : "",
+                              "identifier" : "",
+                              "data_type" : "",
+                              "remark" : "",
+                              "expression" : "",
+                              "mock_data" : "",
+
+                          }]
+                }]
+    }
+}
+
+
+
+
+
+
+"check_in" :
+{
+    "_id" : "",
+    "create_data" : "",
+    "tag" : "",
+    "user_id" : "",
+    "project_id" : "",
+    "description" : "",
+    "version" : "",
+    "project_data" : "",
+    "log" : ""
+
+
+}
+packages
+{
+    "_id" : ObjectId( "53577a23c56fbd4e912890b2" ),
+    "name" : "about",
+    "settings" : { "anotherSettings" : "some value" },
+    "updated" : Date( 1398242081206 )
+}
+
+action设计
+lotus/dashboard
+
+lotus/                    首页
+lotus/about               关于页面
+
+公司模块
+lotus/company             公司列表
+lotus/company/:id         公司详情lotus/company/view
+lotus/company/create      创建公司lotus/company/create
+lotus/company/edit        修改公司lotus/company/edit
+
+产品线
+lotus/productline
+lotus/productline/:id
+lotus/productline/create
+lotus/productline/edit
+
+项目
+lotus/project
+lotus/project/:id
+lotus/project/create
+lotus/project/edit
+
+模块
+lotus/module/create
+lotus/module/edit
+
+页面
+lotus/page/create
+lotus/page/edit
+
+请求
+lotus/action/create
+
+
+
+
+用户模块
+lotus/account/:id
+lotus/login
+lotus/register
+lotus/logout
+
+
 
 ```
-$ npm install -g bower
-```
 
-### Optional [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-* Grunt - Download and Install [Grunt](http://gruntjs.com).
+定义页面请求
+
+分模块
+
+
+
+
 
 ## Additional Packages
 * Express - Defined as npm module in the [package.json](package.json) file.
@@ -28,115 +230,13 @@ $ npm install -g bower
 * Twitter Bootstrap - Defined as bower module in the [bower.json](bower.json) file.
 * UI Bootstrap - Defined as bower module in the [bower.json](bower.json) file.
 
-## Quick Install
-  The quickest way to get started with MEAN is to install the `meanio` package from NPM.
 
-  Install MEAN CLI:
-
-    $ [sudo] npm install -g meanio@latest
-    $ mean init <myApp>
-    $ cd <myApp> && npm install
-
-  We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
-
-    $ grunt
-
-  When not using grunt you can use:
-
-    $ node server
-
-  Then open a browser and go to:
-
-    http://localhost:3000
-
-
-## Troubleshooting
-During install some of you may encounter some issues, most of this issues can be solved by one of the following tips.
-If you went through all this and still can't solve the issue, feel free to contact us via the repository issue tracker or the links provided below.
-
-#### Update NPM, Bower or Grunt
-Sometimes you may find there is a weird error during install like npm's *Error: ENOENT*, usually updating those tools to the latest version solves the issue.
-
-Updating NPM:
-```
-$ npm update -g npm
-```
-
-Updating Grunt:
-```
-$ npm update -g grunt-cli
-```
-
-Updating Bower:
-```
-$ npm update -g bower
-```
-
-#### Cleaning NPM and Bower cache
-NPM and Bower has a caching system for holding packages that you already installed.
-We found that often cleaning the cache solves some troubles this system creates.
-
-NPM Clean Cache:
-```
-$ npm cache clean
-```
-
-Bower Clean Cache:
-```
-$ bower cache clean
-```
-
- 
-## Configuration
-All configuration is specified in the [server/config](server/config/) folder, particularly the [config.js](server/config/config.js) file and the [env](server/config/env/) files. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
-
-### Environmental Settings
-
-There are three environments provided by default, __development__, __test__, and __production__. Each of these environments has the following configuration options:
-* __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.
-* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.
-* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:
-  * __clientID__
-  * __clientSecret__
-  * __callbackURL__
-
-To run with a different environment, just specify NODE_ENV as you call grunt:
-
-  $ NODE_ENV=test grunt
-
-If you are using node instead of grunt, it is very similar:
-
-    $ NODE_ENV=test node server
-
-> NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
 
 ## Getting Started
-  We pre-included an article example, check it out:
-  * [The Model](server/models/article.js) - Where we define our object schema.
-  * [The Controller](server/controllers/articles.js) - Where we take care of our backend logic.
-  * [NodeJS Routes](server/routes) - Where we define our REST service routes.
-  * [AngularJs Routes](public/articles/routes/articles.js) - Where we define our CRUD routes.
-  * [The AngularJs Service](public/articles/services/articles.js) - Where we connect to our REST service.
-  * [The AngularJs Controller](public/articles/controllers/articles.js) - Where we take care of  our frontend logic.
-  * [The AngularJs Views Folder](public/articles/views) - Where we keep our CRUD views.
-
-## Heroku Quick Deployment
-Before you start make sure you have <a href="https://toolbelt.heroku.com/">heroku toolbelt</a> installed and an accessible mongo db instance - you can try <a href="http://www.mongohq.com/">mongohq</a> which has an easy setup.
-Add the db string to the production env in server/config/env/production.js.
-
-```bash
-git init
-git add .
-git commit -m "initial version"
-heroku apps:create
-heroku config:add BUILDPACK_URL=https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt.git
-git push heroku master
-heroku config:set NODE_ENV=production
-```
-
-## More Information
-  * Visit us at [Linnovate.net](http://www.linnovate.net/).
-  * Visit our [Ninja's Zone](http://www.meanleanstartupmachine.com/) for extended support.
-
-## License
-[The MIT License](http://opensource.org/licenses/MIT)
+* [The Model](server/models/article.js) - 定义模型.
+* [The Controller](server/controllers/articles.js) - 后台逻辑.
+* [NodeJS Routes](server/routes) - 后台路由.
+* [AngularJs Routes](public/articles/routes/articles.js) - 前台路由.
+* [The AngularJs Service](public/articles/services/articles.js) - Where we connect to our REST service.
+* [The AngularJs Controller](public/articles/controllers/articles.js) - 前台逻辑.
+* [The AngularJs Views Folder](public/articles/views) - 前台视图.

@@ -1,0 +1,18 @@
+<2014-05-05 00:02:57> <http-bio-8080-exec-9> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399219377430' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399219377430' with value '[Ljava.lang.String;@2e21fe4f'
+
+<2014-05-05 00:07:57> <http-bio-8080-exec-2> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399219677402' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399219677402' with value '[Ljava.lang.String;@2e4a36f8'
+
+<2014-05-05 00:12:57> <http-bio-8080-exec-6> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399219977375' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399219977375' with value '[Ljava.lang.String;@59c1a372'
+
+<2014-05-05 00:17:57> <http-bio-8080-exec-7> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399220277348' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399220277348' with value '[Ljava.lang.String;@cc1d1e2'
+
+<2014-05-05 00:22:57> <http-bio-8080-exec-4> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399220577321' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399220577321' with value '[Ljava.lang.String;@43cd72bc'
+
+<2014-05-05 00:27:57> <http-bio-8080-exec-5> com.opensymphony.xwork2.interceptor.ParametersInterceptor.setParameters(ParametersInterceptor.java:242) 
+<ERROR> ParametersInterceptor - [setParameters]: Unexpected Exception caught setting 'b1399220877296' on 'class com.taobao.rigel.rap.workspace.web.action.WorkspaceAction: Error setting expression 'b1399220877296' with value '[Ljava.lang.String;@66fa74b9'
+

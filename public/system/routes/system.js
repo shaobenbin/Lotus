@@ -1,8 +1,10 @@
 'use strict';
 
-//Setting up route
+// 设置后端路由
+// Setting up route
 angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
+            // 没有匹配路由的话跳转到首页
             // For unmatched routes:
             $urlRouterProvider.otherwise('/');
 
