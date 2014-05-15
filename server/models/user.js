@@ -1,15 +1,11 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto');
 
 /**
  * 用户模型
- * User Schema
  */
 var UserSchema = new Schema({
     username: {
@@ -94,10 +90,6 @@ UserSchema.pre('save', function(next) {
         next();
 });
 
-/**
- * 方法
- * Methods - assign a function to the "methods" object of our animalSchema.
- */
 UserSchema.methods = {
 
     /**

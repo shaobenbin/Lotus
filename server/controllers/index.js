@@ -18,7 +18,6 @@ exports.render = function(req, res) {
     // Send some basic starting info to the view
     res.render('index', {
         user: req.user ? JSON.stringify({
-//            name: req.user.name,
             _id: req.user._id,
             username: req.user.username,
             roles: (req.user ? req.user.roles : ['annonymous'])

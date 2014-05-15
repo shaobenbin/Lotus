@@ -33,7 +33,8 @@
         "it",
         "inject",
         "expect",
-        "spyOn"
+        "spyOn",
+        "angular"
     ],
     "indent": 4, // Specify indentation spacing
     "devel": true, // Allow development statements e.g. `console.log();`.

@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
 
 module.exports = function(passport) {
 
+    // 序列化用户 id ，放入 session
     // Serialize the user id to push into the session
     passport.serializeUser(function(user, done) {
         done(null, user.id);

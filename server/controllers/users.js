@@ -1,12 +1,10 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
 /**
+ * 验证回调
  * Auth callback
  */
 exports.authCallback = function(req, res) {
@@ -14,6 +12,7 @@ exports.authCallback = function(req, res) {
 };
 
 /**
+ * 显示登录表单
  * Show login form
  */
 exports.signin = function(req, res) {
@@ -39,26 +38,34 @@ exports.session = function(req, res) {
 };
 
 /**
+ * 创建用户
  * Create user
  */
 exports.create = function(req, res, next) {
+    // 根据 post 过来的数据创建新用户
     var user = new User(req.body);
 
+    // 设置用户来源
     user.provider = 'local';
 
+    // 验证数据
     // because we set our user.provider to local our models/user.js validation will always be true
+    req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
     req.assert('email', 'You must enter a valid email address').isEmail();
-    req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
-//    req.assert('username', 'Username cannot be more than 20 characters').len(1,20);
+    req.assert('password', 'Password must be between 8-20 characters long').len(1, 20);
     req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
+    // 调用框架方法验证参数
     var errors = req.validationErrors();
     if (errors) {
         return res.status(400).send(errors);
     }
 
+    // 硬编码用户角色，后期会加上权限管理系统
     // Hard coded for now. Will address this with the user permissions system in v0.3.5
     user.roles = ['authenticated'];
+
+    // 调用 mongoose 方法保存到数据库
     user.save(function(err) {
         if (err) {
             switch (err.code) {
@@ -69,16 +76,19 @@ exports.create = function(req, res, next) {
                 default:
                     res.status(400).send('Please fill all the required fields');
             }
-
             return res.status(400);
         }
+        // 登录账号
         req.logIn(user, function(err) {
-            if (err) return next(err);
+            if (err) {
+                return next(err);
+            }
             return res.redirect('/');
         });
         res.status(200);
     });
 };
+
 /**
  * Send User
  */
@@ -87,6 +97,7 @@ exports.me = function(req, res) {
 };
 
 /**
+ * 根据 id 查找用户
  * Find user by id
  */
 exports.user = function(req, res, next, id) {

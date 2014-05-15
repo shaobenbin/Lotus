@@ -43,12 +43,14 @@ module.exports = function(app, passport, db) {
     // assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);
 
+    // 设置默认扩展名
     // set .html as the default extension
     app.set('view engine', 'html');
 
     // Set views path, template engine and default layout
     app.set('views', config.root + '/server/views');
 
+    // 开启对 jsonp 的支持
     // Enable jsonp
     app.enable('jsonp callback');
 
@@ -56,12 +58,14 @@ module.exports = function(app, passport, db) {
         // The cookieParser should be above session
         app.use(express.cookieParser());
 
+        // 中间件
         // Request body parsing middleware should be above methodOverride
         app.use(express.urlencoded());
         app.use(express.json());
         app.use(expressValidator());
         app.use(express.methodOverride());
 
+        // 导入资源文件
         // Import your asset file
         var assets = require('./assets.json');
         assetmanager.init({
@@ -70,6 +74,8 @@ module.exports = function(app, passport, db) {
             debug: (process.env.NODE_ENV !== 'production'),
             webroot: 'public/public'
         });
+
+        // 资源赋值给本地变量
         // Add assets to local variables
         app.use(function(req, res, next) {
             res.locals({
@@ -94,6 +100,7 @@ module.exports = function(app, passport, db) {
         app.use(passport.initialize());
         app.use(passport.session());
 
+        // 在路由前导入中间件
         //mean middleware from modules before routes
         app.use(mean.chainware.before);
 

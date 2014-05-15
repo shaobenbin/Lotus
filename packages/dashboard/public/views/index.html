@@ -1,0 +1,87 @@
+<div id="dashboard" class="dashboard container-fluid">
+    <!-- data-ng-controller="TestController"-->
+    <div class="dashboard-content row">
+        <div class="wb-page-header col-md-12">
+            <div class="wb-page-header-inner">
+                <div class="wb-page-header-main">
+                    <h1>{{dashboard.name}}</h1>
+                </div>
+                <div id="dash-options" class="wb-page-header-actions">
+                </div>
+            </div>
+        </div>
+        <div class="wb-page-search col-md-9">
+
+            <!-- 带补全的搜索功能 S -->
+            <div class="wb-page-search-main input-group" ng-controller="TypeaheadController">
+                <input type="text" ng-model="asyncSelected" placeholder="search via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="wb-page-search-inputer form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">同步<span ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></span></button>
+                </span>
+            </div>
+            <!-- 带补全的搜索功能 E -->
+
+        </div>
+        <div class="wb-actions-group col-md-3">
+
+            <!-- 下拉菜单 S -->
+            <div ng-controller="DropdownController">
+                <div class="btn-group" dropdown is-open="status.isopen">
+                    <button type="button" class="btn btn-danger">新建项目</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle" ng-disabled="disabled">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">新建公司</a></li>
+                        <li><a href="#">新建产品线</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 下拉菜单 E -->
+
+        </div>
+        <div class="dashboard-shim">
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">公司名称 - 蘑菇街</div>
+
+                    <div class="panel-body">
+                        <p>公司介绍 - 蘑菇街介绍</p>
+                    </div>
+
+                    <!-- 手风琴列表 S -->
+                    <div ng-controller="AccordionProjectController">
+                        <accordion close-others="oneAtATime">
+                            <accordion-group is-open="!status.open">
+                                <accordion-heading>
+                                    产品线二<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                </accordion-heading>
+                                <ul>
+                                    <li>
+                                        <a href="http://jira.mogujie.org/browse/BEAUTY" target="_parent">项目二</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://jira.mogujie.org/browse/BEAUTY" target="_parent">项目二</a>
+                                    </li>
+                                </ul>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                    <!-- 手风琴列表 E -->
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">我的接口</div>
+                    <div class="panel-body">
+                        <p>公司介绍 - 蘑菇街介绍</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

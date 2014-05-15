@@ -3,6 +3,7 @@
 var mean = require('meanio');
 
 module.exports = function(app) {
+
     app.get('/admin/menu/:name', function(req, res) {
         var roles = (req.user ? req.user.roles : ['annonymous']);
         var menu = req.params.name ? req.params.name : 'main';
@@ -20,4 +21,5 @@ module.exports = function(app) {
 
         res.jsonp(items);
     });
+
 };

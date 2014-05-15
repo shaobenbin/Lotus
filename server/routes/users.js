@@ -1,5 +1,6 @@
 'use strict';
 
+// 导入用相关的控制器
 // User routes use users controller
 var users = require('../controllers/users');
 
@@ -8,7 +9,9 @@ module.exports = function(app, passport) {
     app.get('/logout', users.signout);
     app.get('/users/me', users.me);
 
+    // 设置用户相关接口
     // Setting up the users api
+    // 点击注册按钮调用此方法
     app.post('/register', users.create);
 
     // Setting up the userId param
