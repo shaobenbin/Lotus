@@ -20,7 +20,8 @@ var CompanySchema = new Schema({
         required: true
     },                  //"公司描述",
     logo_url: String,
-    user_id: Number     //"1"
+    user_name: String,
+    user_id: String     //"1"
 });
 
 mongoose.model('Company', CompanySchema);
