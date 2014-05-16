@@ -49,7 +49,6 @@ exports.create = function(req, res, next) {
     user.provider = 'local';
 
     // 验证数据
-    // because we set our user.provider to local our models/user.js validation will always be true
     req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
     req.assert('email', 'You must enter a valid email address').isEmail();
     req.assert('password', 'Password must be between 8-20 characters long').len(1, 20);
@@ -62,7 +61,6 @@ exports.create = function(req, res, next) {
     }
 
     // 硬编码用户角色，后期会加上权限管理系统
-    // Hard coded for now. Will address this with the user permissions system in v0.3.5
     user.roles = ['authenticated'];
 
     // 调用 mongoose 方法保存到数据库
@@ -98,7 +96,6 @@ exports.me = function(req, res) {
 
 /**
  * 根据 id 查找用户
- * Find user by id
  */
 exports.user = function(req, res, next, id) {
     User.findOne({

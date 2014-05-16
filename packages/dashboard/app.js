@@ -1,13 +1,8 @@
 'use strict';
 
 var Module = require('meanio').Module;
-
 var Dashboard = new Module('Dashboard');
 
-/*
- * All MEAN packages require registration
- * Dependency injection is used to define required modules
- */
 Dashboard.register(function (app, auth, database) {
 
     // 开启路由
@@ -19,6 +14,14 @@ Dashboard.register(function (app, auth, database) {
         link: 'dashboard example page',
         roles: ['authenticated'],
         menu: 'main'
+    });
+
+    // 为注册用户添加菜单
+    Dashboard.menus.add({
+        title: 'dashboard2',
+        link: 'dashboard example page 2',
+        roles: ['authenticated'],
+        menu: 'main2'
     });
 
     return Dashboard;

@@ -1,0 +1,53 @@
+<div class="portal-view fade in" ng-controller="ProjectController">
+    <ul class="project-category">
+
+        <!-- 个人项目 S -->
+        <li class="project-category-item personal">
+            <header class="project-category-header">
+                <div class="project-category-title">个人项目</div>
+                <hr>
+            </header>
+            <ul class="projects clearfix organization-null">
+                <li class="project active-project card pull-left" ng-repeat="project in personal.projects">
+                    <div class="project-info">
+                        <div>
+                            <div class="edit-set pull-right">
+                                <a class="icon icon-pencil edit-handler"></a>
+                                <a class="icon icon-star flag-handler"></a>
+                            </div>
+                            <img ngSrc="{{project.logo}}" alt=""/>
+                            <h3 class="project-name">{{project.name}}</h3>
+                        </div>
+                        <p class="project-desc">{{project.desc}}</p>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <!-- 个人项目 E -->
+
+        <!-- 组织项目 S -->
+        <li class="project-category-item personal" ng-repeat="organization in organizations">
+            <header class="project-category-header">
+                <div class="project-category-title">{{organization.name}}</div>
+                <hr>
+            </header>
+            <ul class="projects clearfix organization-null">
+                <li class="project active-project card pull-left " ng-repeat="project in organization.projects">
+                    <div class="project-info">
+                        <div>
+                            <div class="edit-set pull-right">
+                                <a class="icon icon-pencil edit-handler"></a>
+                                <a class="icon icon-star flag-handler"></a>
+                            </div>
+                            <img ngSrc="{{project.logo}}" alt=""/>
+                            <h3 class="project-name">{{project.name}}</h3>
+                        </div>
+                        <p class="project-desc">{{project.desc}}</p>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <!-- 组织项目 E -->
+
+    </ul>
+</div>

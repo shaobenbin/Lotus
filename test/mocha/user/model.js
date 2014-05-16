@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var should = require('should'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
@@ -15,7 +12,6 @@ describe('<Unit Test>', function() {
     describe('Model User:', function() {
         before(function(done) {
             user = new User({
-                name: 'Full name',
                 email: 'test@test.com',
                 username: 'user',
                 password: 'password',

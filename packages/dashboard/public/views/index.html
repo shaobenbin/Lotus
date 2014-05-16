@@ -1,6 +1,8 @@
 <div id="dashboard" class="dashboard container-fluid">
+
     <!-- data-ng-controller="TestController"-->
     <div class="dashboard-content row">
+
         <div class="wb-page-header col-md-12">
             <div class="wb-page-header-inner">
                 <div class="wb-page-header-main">
@@ -10,49 +12,60 @@
                 </div>
             </div>
         </div>
-        <div class="wb-page-search col-md-9">
+        
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="wb-page-search col-md-9">
 
-            <!-- 带补全的搜索功能 S -->
-            <div class="wb-page-search-main input-group" ng-controller="TypeaheadController">
-                <input type="text" ng-model="asyncSelected" placeholder="search via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="wb-page-search-inputer form-control">
+                <!-- 带补全的搜索功能 S -->
+                <div class="wb-page-search-main input-group" ng-controller="TypeaheadController">
+                    <input type="text" ng-model="asyncSelected" placeholder="search via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="wb-page-search-inputer form-control">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">同步<span ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></span></button>
                 </span>
-            </div>
-            <!-- 带补全的搜索功能 E -->
-
-        </div>
-        <div class="wb-actions-group col-md-3">
-
-            <!-- 下拉菜单 S -->
-            <div ng-controller="DropdownController">
-                <div class="btn-group" dropdown is-open="status.isopen">
-                    <button type="button" class="btn btn-danger">新建项目</button>
-                    <button type="button" class="btn btn-danger dropdown-toggle" ng-disabled="disabled">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">新建公司</a></li>
-                        <li><a href="#">新建产品线</a></li>
-                    </ul>
                 </div>
-            </div>
-            <!-- 下拉菜单 E -->
+                <!-- 带补全的搜索功能 E -->
 
+            </div>
+            <div class="wb-actions-group col-md-3">
+
+                <!-- 下拉菜单 S -->
+                <div ng-controller="DropdownController">
+                    <div class="btn-group" dropdown is-open="status.isopen">
+                        <button type="button" class="btn btn-danger">新建项目</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" ng-disabled="disabled">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">新建公司</a></li>
+                            <li><a href="#">新建产品线</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 下拉菜单 E -->
+
+            </div>
         </div>
+        
+        
+
         <div class="dashboard-shim">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-primary">
 
                     <!-- 公司信息 S -->
-
                     <div ng-controller="CompanyController">
+
                         {{Global}}
-
                         {{status.name}}
-                        {{company}}
-
+                        {{company.__v}}
+                        {{company.name}}
+                        {{company.description}}
+                        {{company.logo_url}}
+                        {{company.user_name}}
+                        {{company.user_id}}
+                        {{company._id}}
+                        {{company | json}}
 
                     </div>
                     <!-- 公司信息 E -->
@@ -86,15 +99,6 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="panel panel-primary">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading">我的接口</div>
-                    <div class="panel-body">
-                        <p>公司介绍 - 蘑菇街介绍</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

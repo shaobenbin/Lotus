@@ -1,9 +1,9 @@
 {
     "name": "dashboard",
-    "version": "0.0.0",
-    "description": "Some description of dashboard",
+    "version": "0.0.1",
+    "description": "lanxi",
     "author": {
-        "name": "mean scaffold"
+        "name": "lanxi"
     },
     "mean": true,
     "engines": {

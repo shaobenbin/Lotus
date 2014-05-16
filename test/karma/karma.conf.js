@@ -1,18 +1,13 @@
 'use strict';
 
-// Karma configuration
-// Generated on Sat Oct 05 2013 22:00:14 GMT+0700 (ICT)
-
 module.exports = function(config) {
     config.set({
 
         // base path, that will be used to resolve files and exclude
         basePath: '../../',
 
-
         // frameworks to use
         frameworks: ['jasmine'],
-
 
         // list of files / patterns to load in the browser
         files: [
@@ -29,7 +24,6 @@ module.exports = function(config) {
             'public/init.js',
             'test/karma/unit/**/*.js'
         ],
-
 
         // list of files to exclude
         exclude: [
@@ -71,7 +65,6 @@ module.exports = function(config) {
 
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: true,
-
 
         // Start these browsers, currently available:
         // - Chrome

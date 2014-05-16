@@ -3,21 +3,21 @@
 var mongoose = require('mongoose'),
     Company = mongoose.model('Company');
 
-exports.created = function(req, res){
+exports.create = function (req, res) {
     var user_name = req.user.username;
     var user_id = req.user._id
     var company_name = req.company_name;
 
-    if(!user_name){
+    if (!user_name) {
         res.redirect('#!/login');
     }
 
-    if(!hasCompany(user_name,company_name)){
+    if (!hasCompany(user_name, company_name)) {
         //var company = new Company(req.body);
-        var company = new Company({"name":"mogujie","description":"啥","logo_url":"http://www.mogujie.com","user_name":user_name,"user_id":user_id})
+        var company = new Company({"name": "mogujie", "description": "啥", "logo_url": "http://www.mogujie.com", "user_name": user_name, "user_id": user_id})
         company.provider = 'local';
 
-        company.save(function(err,result) {
+        company.save(function (err, result) {
             if (err) {
                 switch (err.code) {
                     case 11000:
@@ -33,7 +33,7 @@ exports.created = function(req, res){
             res.jsonp(result || null);
         });
 
-    }else{
+    } else {
         //你已经申请过
         var result = new Array();
         result['fail'] = '已经生产过!';
@@ -41,16 +41,13 @@ exports.created = function(req, res){
     }
 }
 
-var hasCompany = function(user_name,company_name){
-    Company.findOne({'user_name':user_name,"name":company_name},function(err,result){
-        if(err){
+var hasCompany = function (user_name, company_name) {
+        Company.findOne({'user_name': user_name, "name": company_name})
+            .exec( function (err, result) {
+                if (err) {
 
-        }else{
-            if(result && result.name == company_name){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    })
+                } else {
+                    return (result && result.name == company_name);
+                }
+            });
 }
