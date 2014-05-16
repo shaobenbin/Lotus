@@ -21,7 +21,6 @@ angular.module('mean')
                     angular.forEach(res.data.results, function (item) {
                         addresses.push(item.formatted_address);
                     });
-
                     return addresses;
                 });
             };

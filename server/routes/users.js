@@ -4,7 +4,7 @@
 // User routes use users controller
 var users = require('../controllers/users');
 
-module.exports = function(app, passport) {
+module.exports = function (app, passport) {
 
     app.get('/logout', users.signout);
     app.get('/users/me', users.me);
@@ -18,14 +18,14 @@ module.exports = function(app, passport) {
     app.param('userId', users.user);
 
     // AngularJS route to check for authentication
-    app.get('/loggedin', function(req, res) {
+    app.get('/loggedin', function (req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     });
 
     // Setting the local strategy route
     app.post('/login', passport.authenticate('local', {
         failureFlash: true
-    }), function (req,res) {
+    }), function (req, res) {
         res.send(req.user);
     });
 

@@ -10,22 +10,16 @@ var mongoose = require('mongoose'),
 var ProductLineSchema = new Schema({
     name: String,           //"",
     description: String,
-//    create_time: {
-//        type: Date,
-//        default: Date.now
-//    },
     project_num: Number,    //"",
-    user_id: Number,        //"",
+    user_id: String,        //"",
     projects: [{
         version: String, //"",
         name: String,    //"",
-//        create_data: Date,//"",
-        user_id: Number,
+        user_id: String,
         description: String,//"",
         stage: String,//"",
         project_data: String,//"",
         related_ids: Number//"",
-//        update_time: Date//""
     }]
 });
 

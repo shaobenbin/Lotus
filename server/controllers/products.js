@@ -1,8 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    ProductLineSchema = require('../models/products'),
-    ProductLine = mongoose.model('ProductLineSchema');
+    ProductLine = mongoose.model('ProductLine');
 
 mongoose.set('debug', true);
 
@@ -24,8 +23,8 @@ exports.create = function (req, res) {
                 name: '产品一',          //"",
                 user_id: 'lanxi',
                 description: '产品描述一',//"",
-                stage: '1',             //"",
-                related_ids: 'sdf',     //"",
+                stage: 1,             //"",
+                related_ids: 1,     //"",
                 update_time: 'sdf'      //""
             }
         ]
@@ -37,16 +36,18 @@ exports.create = function (req, res) {
             switch (err.code) {
                 case 11000:
                 case 11001:
-                    res.status(400).send('error');
+                    res.status(400).send('error' + err.code);
                     break;
                 default:
-                    res.status(400).send('error');
+                    res.status(400).send('error' + err);
             }
             return res.status(400);
         }
 
         // 创建成功，返回
-        res.status(200);
+        res.jsonp({success: '添加成功'});
+
+//        res.status(200);
     });
 
 //    productLine.findOne({'name':'蘑菇街1'}, function(err,result){
