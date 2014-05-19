@@ -1,7 +1,8 @@
 'use strict';
 
 // configure existing services inside initialization blocks.
-angular.module('mean').config(['$stateProvider',
+angular.module('mean')
+    .config(['$stateProvider',
     // provider-injector
     // @see http://www.angularjs.cn/A00x
     function($stateProvider) {
@@ -24,7 +25,7 @@ angular.module('mean').config(['$stateProvider',
             //                    return '<h1>' + $stateParams.contactId + '</h1>'
             //                }, 100);
             //            }
-            templateUrl: 'dashboard/views/index.html'
+            templateUrl: 'dashboard/views/test.html'
         });
     }
 ]);

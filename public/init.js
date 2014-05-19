@@ -9,6 +9,16 @@ angular.element(document).ready(function() {
     //Then init the app
     angular.bootstrap(document, ['mean']);
 
+    // $(".navbar-fixed-top").headroom({
+    //     "tolerance": 15,
+    //     "offset": 317,
+    //     "classes": {
+    //         "initial": "animated",
+    //         "pinned": "slideDown",
+    //         "unpinned": "slideUp"
+    //     }
+    // });
+
 });
 
 // 动态添加 packages 中定义的 angular 模块

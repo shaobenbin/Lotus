@@ -1,1 +1,228 @@
-.dashboard_example h1{background-color:purple}
+/* from https://www.teambition.com/ */
+.portal-view {
+    margin: 0 auto
+}
+
+.portal-view .no-project {
+    display: none
+}
+
+.portal-view .project-category-item {
+    margin: 50px 0
+}
+
+.portal-view .project-category-header {
+    text-align: left
+}
+
+.portal-view .project-category-header hr {
+    margin-top: -20px;
+    height: 1px;
+    border: 0 none;
+    background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.12) 0), color-stop(rgba(0, 0, 0, 0) 100%));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.12) 0, rgba(0, 0, 0, 0) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1f000000', endColorstr='#00000000', GradientType=1)
+}
+
+.portal-view .project-category-title {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 0 20px 10px 0;
+    font-size: 18px;
+    background-color: #eee
+}
+
+.portal-view .navigate-to-organization-handler {
+    font-size: 16px;
+    color: #08c;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    -webkit-transition: all 218ms ease;
+    transition: all 218ms ease;
+    position: relative;
+    left: 0
+}
+
+.portal-view .navigate-to-organization-handler:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    left: 5px
+}
+
+.portal-view .navigate-to-organization-handler .icon-chevron-right {
+    position: relative;
+    left: -2px;
+    font-size: 14px
+}
+
+.portal-view .portal-placeholder {
+    position: relative;
+    float: left;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 208px;
+    height: 77px;
+    -webkit-background-size: 208px 77px;
+    -moz-background-size: 208px 77px;
+    -o-background-size: 208px 77px;
+    background-size: 208px 77px;
+    margin-right: 30px;
+    margin-top: 70px
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .portal-view .portal-placeholder {
+    }
+}
+
+.portal-view .project {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 150px;
+    margin: 30px 30px 0 0;
+    background-size: cover;
+    background-position: center;
+    background-color: #74bbd8;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: box-shadow ease-in-out 218ms, -webkit-transform 218ms ease-in-out;
+    transition: box-shadow ease-in-out 218ms, transform 218ms ease-in-out
+}
+
+.portal-view .project .edit-set {
+    line-height: 30px
+}
+
+.portal-view .project .edit-set .icon {
+    padding: 0 3px;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 218ms ease, color 218ms ease;
+    transition: opacity 218ms ease, color 218ms ease
+}
+
+.portal-view .project.animation {
+    -webkit-animation: zoom .5s ease-out;
+    -moz-animation: zoom .5s ease-out;
+    -ms-animation: zoom .5s ease-out;
+    -o-animation: zoom .5s ease-out;
+    animation: zoom .5s ease-out
+}
+
+.portal-view .project:hover {
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+    -webkit-box-shadow: 0 7px 21px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 7px 21px rgba(0, 0, 0, 0.15)
+}
+
+.portal-view .project:hover .edit-set .icon {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transition-delay: 0;
+    transition-delay: 0
+}
+
+.portal-view .project:hover .edit-set .icon:hover {
+    color: #fff
+}
+
+.portal-view .project.flagged .edit-set .icon-star, .portal-view .project.flagged .edit-set .icon-star:hover {
+    color: #fbb450;
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+.portal-view .organization .placeholder {
+    margin-top: 42px;
+    display: none
+}
+
+.portal-view .organization.no-organization-project .placeholder {
+    display: block
+}
+
+.portal-view .project-info {
+    margin: 0;
+    padding: 10px 15px 30px;
+    color: #fff;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d000000', endColorstr='#00000000', GradientType=0)
+}
+
+.portal-view .project-name {
+    margin: 0;
+    line-height: 30px;
+    font-size: 18px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.portal-view .project-desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.portal-view .unarchive-project-handler {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    line-height: 150px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 218ms ease-in-out;
+    transition: opacity 218ms ease-in-out
+}
+
+.portal-view .unarchive-project-handler .icon, .portal-view .unarchive-project-handler .icon:hover {
+    font-size: 42px;
+    color: #fff
+}
+
+.portal-view .archived-project:hover .unarchive-project-handler {
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+@media screen and (max-width: 1199px) {
+    .portal-view {
+        width: 960px
+    }
+
+    .portal-view .project {
+        width: 300px
+    }
+
+    .portal-view .project:nth-child(3n) {
+        margin-right: 0
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .portal-view {
+        width: 1160px
+    }
+
+    .portal-view .project {
+        width: 267.5px;
+        height: 133.75px
+    }
+
+    .portal-view .project:nth-child(4n) {
+        margin-right: 0
+    }
+}
