@@ -8,7 +8,7 @@ var should = require('should'),
 var user, user2;
 
 //The tests
-describe('<Unit Test>', function() {
+describe('<user model test>', function() {
     describe('Model User:', function() {
         before(function(done) {
             user = new User({
@@ -43,7 +43,7 @@ describe('<Unit Test>', function() {
             });
 
             it('should show an error when try to save without name', function(done) {
-                user.name = '';
+                user.username = '';
                 return user.save(function(err) {
                     should.exist(err);
                     done();
