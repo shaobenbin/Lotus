@@ -88,7 +88,8 @@ module.exports = function(grunt) {
                 reporter: 'spec',
                 require: 'server.js'
             },
-            src: ['test/mocha/**/*.js','test/mocha/**/**/*.js']
+            src: ['test/mocha/**/*.js']
+//            ,'test/mocha/**/**/*.js']
         },
         env: {
             test: {
@@ -116,7 +117,7 @@ module.exports = function(grunt) {
     }
 
     //Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+    grunt.registerTask('test', ['env:test', 'mochaTest'/*, 'karma:unit'*/]);
 
     // For Heroku users only.
     // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku
