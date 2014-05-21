@@ -45,7 +45,6 @@
             </header>
             <ul class="projects clearfix organization-null">
                 <li class="project active-project card pull-left " ng-repeat="project in organization.projects track by $index" ng-click="ProjectDetail(project._id)">
-                    {{project._id}}
                     <div class="project-info">
                         <div>
                             <div class="edit-set pull-right">
@@ -65,5 +64,7 @@
     </ul>
 
 
-    <section ui-view></section>
+    <section ui-view>
+
+    </section>
 </div>

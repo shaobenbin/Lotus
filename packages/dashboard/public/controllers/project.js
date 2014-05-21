@@ -1,45 +1,46 @@
 'use strict';
 
 angular.module('mean')
-    .controller('ProjectController', ['$scope', '$state','$http', '$modal', '$log', 'Global',
-        function ($scope,$state,$http, $modal, $log, Global) {
+    .controller('ProjectController', ['$scope', '$state','$http', '$resourceProvider', '$modal', '$log', 'Global',
+        function ($scope,$state,$http,$resourceProvider, $modal, $log, Global) {
             $scope.global = Global;
 
 //            var baseUrl = 'http://127.0.0.1:3000/public/test/';
 
-//            $http.get(baseUrl + 'organizations.json').success(function(data) {
-            $scope.organizations = [
-                {
-                    _id: '1',
-                    name: 'A市产品线路一',
-                    desc: '一量产超过',
-                    logo: 'http://m.j/100x100',
-                    owner: 'lanxi',
-                    member: ['lanxi', 'binbin'],
-                    create: 1400242725796,
-                    modified: 1400242725796
-                },
-                {
-                    _id: '2',
-                    name: 'A市产品线路一',
-                    desc: '一量产超过',
-                    logo: 'http://m.j/100x100',
-                    owner: 'lanxi',
-                    member: ['lanxi', 'binbin'],
-                    create: 1400242725796,
-                    modified: 1400242725796
-                },
-                {
-                    _id: '3',
-                    name: 'A市产品线路一',
-                    desc: '一量产超过',
-                    logo: 'http://m.j/100x100',
-                    owner: 'lanxi',
-                    member: ['lanxi', 'binbin'],
-                    create: 1400242725796,
-                    modified: 1400242725796
-                }
-            ];
+//            var User = $resource('/user/:userId', {userId:'@id'});
+//            User.get({userId:123}, function(user) {
+                $scope.organizations = [
+                    {
+                        _id: '1',
+                        name: 'A市产品线路一',
+                        desc: '一量产超过',
+                        logo: 'http://m.j/100x100',
+                        owner: 'lanxi',
+                        member: ['lanxi', 'binbin'],
+                        create: 1400242725796,
+                        modified: 1400242725796
+                    },
+                    {
+                        _id: '2',
+                        name: 'A市产品线路一',
+                        desc: '一量产超过',
+                        logo: 'http://m.j/100x100',
+                        owner: 'lanxi',
+                        member: ['lanxi', 'binbin'],
+                        create: 1400242725796,
+                        modified: 1400242725796
+                    },
+                    {
+                        _id: '3',
+                        name: 'A市产品线路一',
+                        desc: '一量产超过',
+                        logo: 'http://m.j/100x100',
+                        owner: 'lanxi',
+                        member: ['lanxi', 'binbin'],
+                        create: 1400242725796,
+                        modified: 1400242725796
+                    }
+                ];
 //            });
 
 //            $http.get(baseUrl + 'projects.json').success(function(data) {
@@ -162,7 +163,8 @@ angular.module('mean')
             }
 
             $scope.ProjectDetail = function (param) {
-                $state.go('projects.detail', {projectId: param});
+                $state.transitionTo('project.detail');
+//                $state.go('^.project.detail', param);
             };
 
 
@@ -208,7 +210,7 @@ angular.module('mean')
                 };
 
                 var modalInstance = $modal.open({
-                    templateUrl: 'dashboard/create-organization.html',
+                    templateUrl: 'dashboard/views/create-organization.html',
                     backdrop: true,
                     windowClass: 'modal',
                     controller: ModalInstanceCtrl,
@@ -236,7 +238,7 @@ angular.module('mean')
 
             $scope.showCreateProjectDialog = function() {
                 $modal.open({
-                    templateUrl: 'dashboard/create-project.html',
+                    templateUrl: 'dashboard/views/create-project.html',
                     backdrop: true,
                     windowClass: 'modal',
                     controller: function ($scope, $modalInstance, $log, user) {

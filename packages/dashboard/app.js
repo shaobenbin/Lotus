@@ -11,7 +11,7 @@ Dashboard.register(function (app, auth, database) {
     // 为注册用户添加菜单
     Dashboard.menus.add({
         title: 'dashboard',
-        link: 'projects',
+        link: 'dashboard.projects',
         roles: ['authenticated'],
         menu: 'main'
     });

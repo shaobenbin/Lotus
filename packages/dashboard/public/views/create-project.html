@@ -13,7 +13,7 @@
         </div>
         <div>
             <select class="form-control" ng-model="organization.name">
-                <option value="organization.name" ng-repeat="organization in organizations">{{organization.name}}</option>
+                <option value="organization.name" ng-repeat="organization in organizations track by $index">{{organization.name}}</option>
             </select>
         </div>
         <div class="form-group">
