@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('mean-factory-interceptor', [])
-    .factory('httpInterceptor', ['$q', '$location', function ($q, $location) {
+    .factory('httpInterceptor', ['$q', '$location',
+    function ($q, $location) {
         return {
             'response': function (response) {
                 if (response.status === 401) {

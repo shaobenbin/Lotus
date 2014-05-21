@@ -1,7 +1,7 @@
 'use strict';
 
 var Module = require('meanio').Module;
-var Dashboard = new Module('Dashboard');
+var Dashboard = new Module('Dashboard', ['ui.bootstrap']);
 
 Dashboard.register(function (app, auth, database) {
 
@@ -11,18 +11,18 @@ Dashboard.register(function (app, auth, database) {
     // 为注册用户添加菜单
     Dashboard.menus.add({
         title: 'dashboard',
-        link: 'dashboard example page',
+        link: 'projects',
         roles: ['authenticated'],
         menu: 'main'
     });
 
     // 为注册用户添加菜单
-    Dashboard.menus.add({
-        title: 'dashboard2',
-        link: 'dashboard example page 2',
-        roles: ['authenticated'],
-        menu: 'main2'
-    });
+//    Dashboard.menus.add({
+//        title: 'dashboard2',
+//        link: 'project/a',
+//        roles: ['authenticated'],
+//        menu: 'main'
+//    });
 
     return Dashboard;
 });

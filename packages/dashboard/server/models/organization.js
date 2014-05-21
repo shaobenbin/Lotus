@@ -23,9 +23,10 @@ var OrganizationSchema = new Schema({
         type: String,
         required: true
     },
-    members:{
-        type:Array
-    },
+    member: [{
+        type: String,
+        required: true
+    }],
     created: {
         date: Date
     },

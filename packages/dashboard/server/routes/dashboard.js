@@ -21,6 +21,23 @@ module.exports = function(Dashboard, app, auth, database) {
         });
     });
 
+    // 显示创建组织窗口
+    app.get('/dashboard/create-organization.html', function(req, res, next) {
+        Dashboard.render('create-organization', {
+            package: 'dashboard'
+        }, function(err, html) {
+            res.send(html);
+        });
+    });
+    // 显示创建项目窗口
+    app.get('/dashboard/create-project.html', function(req, res, next) {
+        Dashboard.render('create-project', {
+            package: 'dashboard'
+        }, function(err, html) {
+            res.send(html);
+        });
+    });
+
     // TODO: 怎么拆封路由
     // 组织相关
     var organization = require('../controllers/organization.js');

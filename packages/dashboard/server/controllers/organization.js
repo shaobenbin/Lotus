@@ -18,14 +18,23 @@ exports.create = function (req, res) {
     organization.created = dateNow;
     organization.modified = dateNow;
 
-    //处理下members
-    if(!organization.members || organization.members.length==0){
-        var members = new Array();
+    //处理下member
+    if(!organization.member || organization.member.length==0){
+        var member = new Array();
 
-        organization.members = members;
+        organization.member = member;
     }
 
-    organization.members.push(req.user.username);
+    organization.member.push(req.user.username);
+//    var organization = new Organization({
+//        name: 'A市产品线路一',
+//        desc: '一量产超过',
+//        logo: 'http://m.j/100x100',
+//        owner: 'lanxi',
+//        member: ['lanxi', 'binbin'],
+//        create: dateNow,
+//        updated: dateNow
+//    });
 
     // 调用 mongoose 方法保存到数据库
     organization.save(function (err) {
@@ -82,7 +91,7 @@ exports.fetchByMember = function(req,res){
 
     var skip_num = (page-1)*perpage;
 
-    Organization.find({members:member_name},function(err,result){
+    Organization.find({member:member_name},function(err,result){
         if (err) {
             switch (err.code) {
                 default:
@@ -140,20 +149,20 @@ exports.del = function(req,res){
 exports.modify = function(req,res){
     var name = req.body.name,
         owner = req.user.username,
-        members = req.body.members,
+        member = req.body.member,
         desc = req.body.desc,
         logo = req.body.logo;
 
     var dateNow =  Date.now();
 
-    if (!(members instanceof Array)){
-        members = new Array();
+    if (!(member instanceof Array)){
+        member = new Array();
     }
 
-    members.push(owner);
+    member.push(owner);
 
 
-    Organization.update({name:name,owner:owner},{members:members,desc:desc,logo:logo,modified:dateNow},function(err){
+    Organization.update({name:name,owner:owner},{member:member,desc:desc,logo:logo,modified:dateNow},function(err){
         if (err) {
             switch (err.code) {
                 default:
