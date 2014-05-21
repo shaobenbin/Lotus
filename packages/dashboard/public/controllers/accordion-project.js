@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean')
-    .controller('AccordionProjectController', ['$scope',
-        function ($scope) {
+    .controller('AccordionProjectController', ['$scope', '$http',
+        function ($scope, $http) {
             $scope.oneAtATime = false;
 
             $scope.status = {

@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var express = require('express'),
     mean = require('meanio'),
     consolidate = require('consolidate'),

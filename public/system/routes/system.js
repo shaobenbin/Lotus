@@ -6,11 +6,10 @@ angular.module('mean.system')
     .config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
             // 没有匹配路由的话跳转到首页
-            // For unmatched routes:
             $urlRouterProvider.otherwise('/');
 
-            // states for my app
-            $stateProvider              
+            // 应用状态
+            $stateProvider
                 .state('home', {
                     url: '/',
                     templateUrl: 'public/system/views/index.html'

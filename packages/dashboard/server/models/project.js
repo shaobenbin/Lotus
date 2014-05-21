@@ -27,7 +27,7 @@ var ProjectSchema = new Schema({
     created: {
         date: Date
     },
-    modified: {
+    updated: {
         date: Date
     },
     organization: {

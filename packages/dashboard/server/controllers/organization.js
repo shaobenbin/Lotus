@@ -12,8 +12,9 @@ exports.create = function (req, res) {
         desc: '一量产超过',
         logo: 'http://m.j/100x100',
         owner: 'lanxi',
+        member: ['lanxi', 'binbin'],
         create: dateNow,
-        modified: dateNow
+        updated: dateNow
     });
 
     // 调用 mongoose 方法保存到数据库

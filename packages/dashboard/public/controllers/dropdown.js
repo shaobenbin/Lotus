@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean')
-    .controller('DropdownController', ['$scope', 'Global',
-        function ($scope, Global, Dashboard) {
+    .controller('DropdownController', ['$scope',
+        function ($scope) {
             $scope.items = [
                 'The first choice!',
                 'And another choice for you.',

@@ -5,11 +5,26 @@
   "private": false,
   "author": "Linnovate <mean@linnovate.net>",
   "contributors": [
-    {"name":"Lior Kesos", "mail": "lior@linnovate.net"},
-    {"name":"Yonatan Ellman", "mail": "yonatan@linnovate.net"},
-    {"name":"Ehud Shahak", "mail": "ehud@linnovate.net"},
-    {"name":"Amos Haviv", "mail": "mail@amoshaviv"},
-    {"name":"Drew Fyock", "mail": "drew@steelbisondev.com"}
+    {
+      "name": "Lior Kesos",
+      "mail": "lior@linnovate.net"
+    },
+    {
+      "name": "Yonatan Ellman",
+      "mail": "yonatan@linnovate.net"
+    },
+    {
+      "name": "Ehud Shahak",
+      "mail": "ehud@linnovate.net"
+    },
+    {
+      "name": "Amos Haviv",
+      "mail": "mail@amoshaviv"
+    },
+    {
+      "name": "Drew Fyock",
+      "mail": "drew@steelbisondev.com"
+    }
   ],
   "repository": {
     "type": "git",
@@ -62,6 +77,8 @@
     "assetmanager": "^0.1.1",
     "grunt-karma": "^0.6.2",
     "grunt-mocha-test": "latest",
+    "gulp": "^3.6.2",
+    "gulp-livereload": "^1.5.0",
     "karma": "^0.10.4",
     "karma-coverage": "^0.1.0",
     "should": "2.1.1",

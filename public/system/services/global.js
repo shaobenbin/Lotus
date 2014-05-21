@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('mean.system').factory('Global', [
+angular.module('mean.system')
+    .factory('Global', [
+
+    // 全局变量
     function() {
         var _this = this;
         _this._data = {
