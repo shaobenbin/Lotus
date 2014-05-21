@@ -15,6 +15,10 @@ module.exports = function(passport, db) {
         require('../util').walk(appPath + '/server/models', null, function(path) {
             require(path);
         });
+
+        require('../util').walk(appPath + '/packages/dashboard/server/models', null, function(path) {
+            require(path);
+        });
     }
 
     bootstrapModels();
