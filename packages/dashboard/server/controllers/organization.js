@@ -101,7 +101,7 @@ exports.fetchByMember = function(req,res){
         }
 
         res.status(200);
-        res.jsonp(result);
+        res.send(result);
     }).skip(skip_num).limit(perpage);
 }
 

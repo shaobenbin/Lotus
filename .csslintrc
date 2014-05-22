@@ -2,7 +2,7 @@
     "adjoining-classes": false,
     "box-model": false,
     "box-sizing": false,
-    "compatible-vendor-prefixes": false,
+    "compatible-vendor-prefixes": true,
     "floats": false,
     "font-sizes": false,
     "gradients": false,

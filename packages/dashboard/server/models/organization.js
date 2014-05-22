@@ -53,6 +53,7 @@ OrganizationSchema.pre('save', function(next) {
             next(err);
         }else{
             if(result.length > 0){
+                // todo: 改成 post 一个报错对象到前端，前端收到后可以根据报错信息给出错误提示
                 next(new Error('has organization['+name+'] of owner['+owner+']'));
             }else{
                 next();

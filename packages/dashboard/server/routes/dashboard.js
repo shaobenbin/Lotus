@@ -2,7 +2,6 @@
 
 module.exports = function(Dashboard, app, auth, database) {
 
-    // TODO: 怎么拆封路由
     // 组织相关
     var organization = require('../controllers/organization.js');
     app.post('/api/organization/create', auth.requiresLogin, organization.create);
@@ -15,7 +14,7 @@ module.exports = function(Dashboard, app, auth, database) {
     var project = require('../controllers/project.js');
     app.post('/project/create', auth.requiresLogin, project.create);
     app.post('/project/del', auth.requiresLogin, project.del);
-    app.post('/project/fetch', auth.requiresLogin, project.fetch);
+    app.get('/project/fetch', auth.requiresLogin, project.fetch);
     app.post('/project/fetchOne', auth.requiresLogin, project.fetchOne);
 
 };

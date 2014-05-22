@@ -24,6 +24,10 @@ var ProjectSchema = new Schema({
         type: String,
         required: true
     },
+    member: [{
+        type: String,
+        required: true
+    }],
     created: {
         date: Date
     },
@@ -31,7 +35,9 @@ var ProjectSchema = new Schema({
         date: Date
     },
     organization: {
-        type: String
+        type: String,
+        default: '个人',
+        required: true
     }
 });
 
@@ -42,23 +48,23 @@ var Project = mongoose.model('Project');
 /**
  * 同一个用户只能建立统一个组织
  */
-ProjectSchema.pre('save', function(next) {
+ProjectSchema.pre('save', function (next) {
     var name = this.name,
         owner = this.owner,
         organization = this.organization;
 
-    if(!organization){
+    if (!organization) {
         organization = null;
     }
 
     //校验下是否已经有了
-    Project.find({name:name,owner:owner,organization:organization},function(err,result){
-        if(err){
+    Project.find({name: name, owner: owner, organization: organization}, function (err, result) {
+        if (err) {
             next(err);
-        }else{
-            if(result.length > 0){
-                next(new Error('has organization['+organization+'] of owner['+owner+'] and project['+name+']'));
-            }else{
+        } else {
+            if (result.length > 0) {
+                next(new Error('has organization[' + organization + '] of owner[' + owner + '] and project[' + name + ']'));
+            } else {
                 next();
             }
         }

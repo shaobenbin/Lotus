@@ -96,16 +96,16 @@ describe('<dashboard organization controller test>', function() {
             })
         });
 
-        it('del the organization without problem',function(done){
-            var request = superagent.agent();
-            request.post(host+'/api/organization/del')
-                .send(postData)
-                .set('cookie',cookie)
-                .end(function(res){
-                    res.status.should.equal(200);
-                    done();
-                });
-        });
+//        it('del the organization without problem',function(done){
+//            var request = superagent.agent();
+//            request.post(host+'/api/organization/del')
+//                .send(postData)
+//                .set('cookie',cookie)
+//                .end(function(res){
+//                    res.status.should.equal(200);
+//                    done();
+//                });
+//        });
 
     });
 
