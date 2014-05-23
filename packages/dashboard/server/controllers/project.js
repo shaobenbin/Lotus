@@ -14,13 +14,12 @@ mongoose.set('debug', true);
 exports.create = function (req, res) {
     var dateNow = Date.now();
     // 根据 post 过来的数据创建新用户
-
-
-
     var project = new Project(req.body);
     project.created = dateNow;
     project.modified = dateNow;
     project.owner = req.user.username;
+    project.member = [];
+    project.member.push(req.user.username);
 
     // 验证数据
     req.assert('name', 'name cannot be more than 20 characters').len(1, 20);
@@ -31,9 +30,7 @@ exports.create = function (req, res) {
         return res.status(400).send(errors);
     }
 
-
-
-    project.save(function(err) {
+    project.save(function (err) {
         if (err) {
             switch (err.code) {
                 default:
@@ -52,15 +49,15 @@ exports.create = function (req, res) {
  * @param req
  * @param res
  */
-exports.fetch = function(req,res){
+exports.fetch = function (req, res) {
     var organization = req.body.organization,
         username = req.user.username;
 
-    if(!organization){
-        organization = null;
-    }
+//    if (!organization || organization === '个人') {
+//        organization = '个人';
+//    }
 
-    Project.find({organization:organization,owner:username},function(err,projects){
+    Project.find({owner: username}, function (err, projects) {
         if (err) {
             switch (err.code) {
                 default:
@@ -68,10 +65,8 @@ exports.fetch = function(req,res){
             }
             return res.status(400);
         }
-
         res.status(200);
         res.jsonp(projects);
-
     });
 }
 
@@ -84,6 +79,10 @@ exports.fetchOne = function(req,res){
     var username = req.user.username,
         organization = req.body.organization,
         name = req.body.name;
+
+    if (!organization || organization === '个人') {
+        organization = '个人';
+    }
 
     Project.findOne({organization:organization,owner:username,name:name},function(err,project){
         if (err) {

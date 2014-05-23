@@ -88,7 +88,7 @@ exports.fetchByMember = function(req,res){
         }
 
         res.status(200);
-        res.jsonp(result);
+        res.send(result);
     });
 }
 
@@ -121,7 +121,7 @@ exports.del = function(req,res){
             }
 
             res.status(200);
-            res.jsonp({success: '删除成功'});
+            res.send('删除成功');
         });
     });
 }
@@ -159,6 +159,6 @@ exports.modify = function(req,res){
         }
 
         res.status(200);
-        res.jsonp({success: '修改成功'});
+        res.jsonp('修改成功');
     });
 }

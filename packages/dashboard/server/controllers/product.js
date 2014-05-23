@@ -11,23 +11,25 @@ var mongoose = require('mongoose'),
 exports.create = function (req, res) {
     // 根据 post 过来的数据创建新产品线
     // var productLine = new ProductLine(req.body);
-    var product = new Product({
-        name: 'A市产品线路一',
-        description: '一量产超过',
-        project_num: 12,
-        user_id: 'lanxi',
-        projects: [
-            {
-                version: '0.0.1',
-                name: '产品一',
-                user_id: 'lanxi',
-                description: '产品描述一',
-                stage: 1,
-                related_ids: 1,
-                update_time: 'sdf'
-            }
-        ]
-    });
+//    var product = new Product({
+//        name: 'A市产品线路一',
+//        description: '一量产超过',
+//        project_num: 12,
+//        user_id: 'lanxi',
+//        projects: [
+//            {
+//                version: '0.0.1',
+//                name: '产品一',
+//                user_id: 'lanxi',
+//                description: '产品描述一',
+//                stage: 1,
+//                related_ids: 1,
+//                update_time: 'sdf'
+//            }
+//        ]
+//    });
+
+    var product = new Product(req.body);
 
     // 调用 mongoose 方法保存到数据库
     product.save(function (err) {
@@ -50,16 +52,23 @@ exports.create = function (req, res) {
 
 
 /**
- * 删除产品线
+ * 删除产品
  * Create ProductLine
  */
-exports.delete = function (req, res, next) {
+exports.delete = function (req, res) {
     // 根据 post 过来的数据创建新用户
-    var productLine = new Product(req.body);
+    var product_name = null;
+    var organiz_name = null;
+    Product.remove({"name":product_name,"organization":organiz_name},function(err){
+        if(err){
+            res.jsonp({fail:'删除失败'});
+        }
+        res.jsonp({success:'删除'+product_name+"成功!"});
 
+    });
     // 验证参数
     // because we set our user.provider to local our models/user.js validation will always be true
-    req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
+    //req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
 
 }
 
@@ -67,7 +76,7 @@ exports.delete = function (req, res, next) {
  * 修改产品线
  * Create ProductLine
  */
-exports.save = function (req, res, next) {
+exports.modify = function (req, res) {
     // 根据 post 过来的数据创建新用户
     var productLine = new Product(req.body);
 

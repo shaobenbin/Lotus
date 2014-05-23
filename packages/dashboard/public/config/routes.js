@@ -11,7 +11,25 @@ angular.module('mean')
         // 定义子状态
         // @see https://github.com/angular-ui/ui-router/wiki
         $stateProvider
-            .state('projects', {
+            .state('dashboard', {
+                data: 'projects',
+                url: '/dashboard',
+                // 引入模板。需要使用内联模板的话使用 template 而不是 templateUrl
+                // templateUrl 也可以是一个 返回模板页的方法
+                // @example
+                //            templateUrl: function (stateParams){
+                //                 return '/partials/contacts.' + stateParams.filterBy + '.html';
+                //            }
+                // 可以使用依赖注入
+                // @example
+                //            templateProvider: function ($timeout, $stateParams) {
+                //                return $timeout(function () {
+                //                    return '<h1>' + $stateParams.contactId + '</h1>'
+                //                }, 100);
+                //            }
+                templateUrl: 'dashboard/views/index.html'
+            })
+            .state('dashboard.projects', {
                 data: 'projects',
                 url: '/projects',
                 // 引入模板。需要使用内联模板的话使用 template 而不是 templateUrl
@@ -27,11 +45,11 @@ angular.module('mean')
                 //                    return '<h1>' + $stateParams.contactId + '</h1>'
                 //                }, 100);
                 //            }
-                templateUrl: 'dashboard/views/test.html'
+                templateUrl: 'dashboard/views/projects.html'
             })
-            .state('projects.detail', {
-                data: 'projects.detail',
-                url: '/{projectId:id}',
+            .state('dashboard.project', {
+                data: 'project.index',
+                url: '/project/:id',
                 // 引入模板。需要使用内联模板的话使用 template 而不是 templateUrl
                 // templateUrl 也可以是一个 返回模板页的方法
                 // @example
