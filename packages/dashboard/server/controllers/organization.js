@@ -59,12 +59,6 @@ exports.create = function (req, res) {
  */
 exports.fetchByOwner = function (req, res) {
     var user_name = req.user.username;
-    var page = req.param.page;
-    if(!page || page>100){
-        page = 1;
-    }
-
-    var skip_num = (page-1)*perpage;
 
     Organization.find({"owner":user_name},function(err,result){
         if(err){
@@ -73,7 +67,7 @@ exports.fetchByOwner = function (req, res) {
 
         res.status(200);
         res.jsonp(result);
-    }).skip(skip_num).limit(perpage);
+    })
 }
 
 /**
@@ -83,13 +77,6 @@ exports.fetchByOwner = function (req, res) {
  */
 exports.fetchByMember = function(req,res){
     var member_name = req.user.username;
-    var page = req.param.page;
-
-    if(!page || page>100){
-        page = 1;
-    }
-
-    var skip_num = (page-1)*perpage;
 
     Organization.find({member:member_name},function(err,result){
         if (err) {
@@ -102,7 +89,7 @@ exports.fetchByMember = function(req,res){
 
         res.status(200);
         res.jsonp(result);
-    }).skip(skip_num).limit(perpage);
+    });
 }
 
 /**
