@@ -53,7 +53,7 @@ describe('<dashboard organization controller test>', function() {
 
         it('get oranization witch owner is me',function(done){
             var request = superagent.agent();
-            request.get(host+'/api/organizations/me/1')
+            request.get(host+'/api/organizations/me')
                 .set('cookie',cookie)
                 .end(function(res){
                     res.status.should.equal(200);
@@ -65,7 +65,7 @@ describe('<dashboard organization controller test>', function() {
 
         it('get oranization of member',function(done){
             var request = superagent.agent();
-            request.get(host+'/api/organizations/1')
+            request.get(host+'/api/organizations')
                 .set('cookie',cookie)
                 .end(function(res){
                     res.status.should.equal(200);
