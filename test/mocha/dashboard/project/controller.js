@@ -64,7 +64,7 @@ describe('<dashboard organization controller test', function () {
 
         it('query project of project name',function(done){
             var request = superagent.agent();
-            request.post('http://localhost:3000/project/fetchOne')
+            request.get('http://localhost:3000/project/fetchOne')
                 .send(postData)
                 .set('cookie',cookie)
                 .end(function(res){
@@ -77,7 +77,7 @@ describe('<dashboard organization controller test', function () {
 
         it('should get user organization projects',function(done){
             var request = superagent.agent();
-            request.post('http://localhost:3000/project/fetch')
+            request.get('http://localhost:3000/project/fetch')
                 .send(postData)
                 .set('cookie',cookie)
                 .end(function(res){
@@ -114,7 +114,7 @@ describe('<dashboard organization controller test', function () {
 
         it('query project of project name,the project no organization',function(done){
             var request = superagent.agent();
-            request.post('http://localhost:3000/project/fetchOne')
+            request.get('http://localhost:3000/project/fetchOne')
                 .send(postNoOrganizData)
                 .set('cookie',cookie)
                 .end(function(res){
@@ -127,7 +127,7 @@ describe('<dashboard organization controller test', function () {
 
         it('query project of username,the project no organization',function(done){
             var request = superagent.agent();
-            request.post('http://localhost:3000/project/fetch')
+            request.get('http://localhost:3000/project/fetch')
                 .send(postNoOrganizData)
                 .set('cookie',cookie)
                 .end(function(res){
