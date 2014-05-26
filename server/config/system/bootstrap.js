@@ -11,7 +11,6 @@ module.exports = function(passport, db) {
 
     function bootstrapModels() {
         // Bootstrap 模型
-        // Bootstrap models
         require('../util').walk(appPath + '/server/models', null, function(path) {
             require(path);
         });
@@ -28,25 +27,21 @@ module.exports = function(passport, db) {
 
     function bootstrapDependencies() {
         // 注册 passport 依赖
-        // Register passport dependency
         mean.register('passport', function() {
             return passport;
         });
 
         // 注册 auth 依赖
-        // Register auth dependency
         mean.register('auth', function() {
             return require(appPath + '/server/routes/middlewares/authorization');
         });
 
         // 注册数据库依赖
-        // Register database dependency
         mean.register('database', {
             connection: db
         });
 
         // 注册应用依赖
-        // Register app dependency
         mean.register('app', function() {
             return app;
         });

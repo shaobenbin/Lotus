@@ -21,7 +21,7 @@ module.exports = function(Dashboard, app, auth, database) {
     //module相关
     var modules = require('../controllers/modules.js');
     app.post('/modules/save', auth.requiresLogin, modules.save);
-    app.get('/modules/fetch',auth.requiresLogin,modules.fetch);
+    app.post('/modules/fetch',auth.requiresLogin,modules.fetch);
     app.get('/modules/fetchofversion',auth.requiresLogin,modules.fetchOfVersion);
 
 };

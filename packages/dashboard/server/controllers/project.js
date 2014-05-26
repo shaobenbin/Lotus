@@ -1,20 +1,17 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Project = mongoose.model('Project');
+    Project = mongoose.model('Project'),
+    _ = require('lodash');
 
 mongoose.set('debug', true);
 
 /**
  * 创建一个项目
- * @param req
- * @param res
- * @returns {*}
  */
 exports.create = function (req, res) {
-    var dateNow = Date.now();
-    // 根据 post 过来的数据创建新用户
     var project = new Project(req.body);
+    var dateNow = Date.now();
     project.created = dateNow;
     project.modified = dateNow;
     project.owner = req.user.username;
@@ -37,10 +34,9 @@ exports.create = function (req, res) {
                     res.status(400).send('Please fill all the required fields');
             }
             return res.status(400);
+        } else {
+            res.jsonp({success: '添加成功'});
         }
-
-        res.status(200);
-        res.jsonp({success: '添加成功'});
     });
 }
 
@@ -129,6 +125,48 @@ exports.del = function(req,res){
 
                 res.status(200);
                 res.jsonp({success: '添加成功'});
-        })
+        });
     });
 }
+
+///**
+// * Delete an project
+// */
+//exports.destroy = function(req, res) {
+//    var project = req.project;
+//
+//    project.remove(function(err) {
+//        if(err) {
+//            return res.send('users/signup', {
+//                error: err.errors,
+//                project: project
+//            });
+//        } else {
+//            res.jsonp(project);
+//        }
+//    })
+//}
+//
+///**
+// * Show an project
+// */
+//exports.show = function(req, res) {
+//    res.jsonp(req.project)
+//}
+//
+///**
+// * List of Projects
+// */
+//exports.all = function(req, res) {
+//    var username = req.user.username;
+//
+//    Project.find({member: username}, function (err, projects) {
+//        if (err) {
+//            res.render('error', {
+//                status: 500
+//            })
+//        } else {
+//            res.jsonp(projects);
+//        }
+//    });
+//}

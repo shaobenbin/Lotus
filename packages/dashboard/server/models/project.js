@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 var ProjectSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     desc: {
         type: String,
@@ -30,6 +30,7 @@ var ProjectSchema = new Schema({
     }],
     created: {
         date: Date
+//        default: Date.now
     },
     updated: {
         date: Date
@@ -44,6 +45,7 @@ var ProjectSchema = new Schema({
 mongoose.model('Project', ProjectSchema);
 
 var Project = mongoose.model('Project');
+
 
 /**
  * 同一个用户只能建立统一个组织

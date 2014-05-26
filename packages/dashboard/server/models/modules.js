@@ -3,55 +3,56 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-/**
- * 组织模型
- */
 var ModulesSchema = new Schema({
     name: {
         type: String,
         required: true
     },
-
-    description:String,
-
-    projectName:{
+    desc:String,
+    projectId:{
         type: String,
         required: true
     },
-
-    organizationName:{
-        type: String
-    },
-
     version:{
         type:Number
     },
-
-    owner:{
+    author:{
         type:String,
         required: true
     },
-
-    page:[{
+    type: {
+        type: String,
+        required: true
+    },
+    items:[{
         name:{
             type: String,
             required: true
         },
-
         template:{
             type:String,
             required:true
         },
-        action:[{
+        type: {
+            type: String,
+            required: true
+        },
+        items:[{
             name:{
                 type:String
             },
-            description:{
+            desc:{
                 type:String
             },
+            type: {
+                type: String,
+                required: true
+            },
             request_type:{
-                type:String},
-            request_url:{type:String
+                type:String
+            },
+            request_url:{
+                type:String
             },
             map_url:{
                 type:String
@@ -101,6 +102,8 @@ var ModulesSchema = new Schema({
 });
 
 mongoose.model('Modules', ModulesSchema);
+
+// 验证不是这样写的！
 var Modules = mongoose.model('Modules');
 
 ModulesSchema.pre('save', function(next) {

@@ -24,5 +24,8 @@ Dashboard.register(function (app, auth, database) {
 //        menu: 'main'
 //    });
 
+    Dashboard.aggregateAsset('css','dashboard.css');
+    Dashboard.aggregateAsset('css','project.css');
+
     return Dashboard;
 });

@@ -1,7 +1,6 @@
 'use strict';
 
 // 设置前端路由
-// Setting up route
 angular.module('mean.system')
     .config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {

@@ -89,7 +89,7 @@ ARP
                     "request_type" : "",
                     "request_url" : "",
                     "map_url": "",
-                    "request_parameter": {
+                    "request_parameter":[ {
                           "_id" : "",
                           "name" : "",
                           "identifier" : "",
@@ -98,7 +98,7 @@ ARP
                           "expression" : "",
                           "mock_data" : "",
 
-                      }
+                      }],
                     "response_parameter" : {
                           "_id" : "",
                           "name" : "",

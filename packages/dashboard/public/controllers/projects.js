@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('mean')
-    .controller('ProjectsController', ['$scope', '$state', '$resource', '$http', '$modal', '$log', 'Global',
-        function ($scope, $state, $resource, $http, $modal, $log, Global) {
+    .controller('ProjectsController', ['$scope', '$state', '$resource', '$http', '$modal', '$log', 'Global', 'ProjectList',
+        function ($scope, $state, $resource, $http, $modal, $log, Global, ProjectList) {
 
             $scope.global = Global;
 
             /**
              * 查询项目列表
              */
-            $http.get('http://127.0.0.1:3000/api/organizations/1').success(function(organizations) {
+            $http.get('http://127.0.0.1:3000/api/organizations').success(function(organizations) {
                 $scope.organizations = organizations;
                 $http.get('http://127.0.0.1:3000/project/fetch').success(function(projects) {
-                    $log.log(projects);
                     $scope.projects = projects;
                     $scope.personal = {};
                     $scope.personal.projects = [];
@@ -39,23 +38,24 @@ angular.module('mean')
                     }
                 });
             });
+//            $scope.personal = ProjectList.getProjectList().personal;
+//            $scope.organizations = ProjectList.getProjectList().organizations;
 
             /**
              * 跳转项目详情
              * @param param
              * @constructor
              */
-            $scope.ProjectDetail = function (param) {
-                $log.log(param);
-                $state.go('dashboard.project', param, {'location': 'replace'});
+            $scope.ProjectDetail = function (id) {
+                $state.go('dashboard.project', {id: id});
             };
 
             /**
              * 创建组织
              */
-            $scope.createOrganizationModal = function() {
+            $scope.createOrganizationModal = function () {
 
-                var createOrganizationModalInstanceController = function ($scope, $modalInstance,$http, $log, user,items) {
+                var createOrganizationModalInstanceController = function ($scope, $modalInstance, $http, $log, user, items) {
                     $scope.organization = {};
                     $scope.organization.name = '';
                     $scope.organization.desc = '';
@@ -63,22 +63,22 @@ angular.module('mean')
 
                     $scope.submit = function () {
                         var newOrganization = {
-                                name: $scope.organization.name,
-                                desc: $scope.organization.desc,
-                                logo: $scope.organization.logo
-                            };
+                            name: $scope.organization.name,
+                            desc: $scope.organization.desc,
+                            logo: $scope.organization.logo
+                        };
 
                         $http.post('http://127.0.0.1:3000/api/organization/create', newOrganization)
-                            .success(function(data) {
-                                $log.log('----------------------------------------------------------success');
+                            .success(function (data) {
                                 // 成功的话返回给前端渲染到页面上
                                 // 或者直接刷新页面
+                                $modalInstance.close({
+                                    name: $scope.organization.name,
+                                    desc: $scope.organization.desc,
+                                    logo: $scope.organization.logo,
+                                    status: 'success'
+                                });
                                 $state.reload();
-//                                $modalInstance.close({
-//                                    name: $scope.organization.name,
-//                                    desc: $scope.organization.desc,
-//                                    logo: $scope.organization.logo
-//                                });
                             });
                     };
                     $scope.cancel = function () {
@@ -113,7 +113,7 @@ angular.module('mean')
             /**
              * 创建项目
              */
-            $scope.createProjectModal = function() {
+            $scope.createProjectModal = function () {
 
                 var createProjectModalInstanceController = function ($scope, $modalInstance, $log, user) {
                     $scope.project = {};
@@ -123,12 +123,12 @@ angular.module('mean')
                     $scope.organizationNames = [];
 
                     // 取到自己所有的组织
-                    $http.get('http://127.0.0.1:3000/api/organizations/1').success(function(organizations) {
+                    $http.get('http://127.0.0.1:3000/api/organizations/1').success(function (organizations) {
                         $scope.organizations = organizations;
                         $scope.organizations.unshift({name: '个人'});
                         var i,
                             len = $scope.organizations.length;
-                        for (i = 0; i < len; i++ ) {
+                        for (i = 0; i < len; i++) {
                             $scope.organizationNames[i] = $scope.organizations[i].name;
                         }
 //                        $scope.project.organization = $scope.organizationNames[0];
@@ -141,16 +141,16 @@ angular.module('mean')
                             'logo': $scope.project.logo,
                             'organization': $scope.project.organization
                         };
-                        $http.post('http://127.0.0.1:3000/project/create', newProject).success(function(data) {
-                            $log.log('----------------------------------------------------------success');
+                        $http.post('http://127.0.0.1:3000/project/create', newProject).success(function (data) {
                             // 成功的话返回给前端渲染到页面上
                             // 暂时新用直接刷新页面的方式
-                            $state.reload();
                             $modalInstance.close({
                                 name: $scope.project.name,
                                 desc: $scope.project.desc,
-                                logo: $scope.project.logo
+                                logo: $scope.project.logo,
+                                status: 'success'
                             });
+                            $state.reload();
                         });
                     };
                     $scope.cancel = function () {

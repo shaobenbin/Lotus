@@ -3,36 +3,37 @@
 var mongoose = require('mongoose'),
     Modules = mongoose.model('Modules');
 
-exports.save = function(req,res){
-
+exports.save = function (req, res) {
     var modules = new Modules(req.body);
     var owner = req.user.username;
-    modules.owner = owner;
-    modules.save(function(err){
-
+    if(!modules.owner) {
+        modules.owner = owner;
+    }
+    modules.save(function (err) {
         if (err) {
             switch (err.code) {
                 default:
                     res.status(400).send('Please fill all the required fields');
             }
             return res.status(400);
-        }else{
+        } else {
             res.status(200);
-            return res.send("success");
+            return res.json("success");
         }
-    })
-
-}
+    });
+};
 
 exports.fetch = function(req,res){
-    var projectName = req.body.projectName;
+
+    var projectId = req.body.projectId;
     var organizationName = req.body.organizationName;
-    if(!organizationName){
+
+    if (!organizationName) {
         organizationName = null;
     }
     var owner = req.user.username;
 
-    Modules.find({projectName:projectName,organizationName:organizationName,owner:owner},function(err,modules){
+    Modules.find({projectId:projectId, author:owner}, function(err, modules){
         if (err) {
             switch (err.code) {
                 default:
@@ -44,7 +45,7 @@ exports.fetch = function(req,res){
             return res.send(modules);
         }
     });
-}
+};
 
 exports.fetchOfVersion = function(req,res){
     var projectName = req.body.projectName;
@@ -67,4 +68,4 @@ exports.fetchOfVersion = function(req,res){
             return res.send(module);
         }
     });
-}
+};

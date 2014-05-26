@@ -3,7 +3,12 @@
 var fs = require('fs'),
     path = require('path');
 
-// recursively walk modules path and callback for each file
+/**
+ * 迭代遍历模块路径为遇到的每个文件添加回调
+ * @param modulesPath
+ * @param excludeDir
+ * @param callback
+ */
 exports.walk = function(modulesPath, excludeDir, callback) {
     fs.readdirSync(modulesPath).forEach(function(file) {
         var newPath = path.join(modulesPath, file);

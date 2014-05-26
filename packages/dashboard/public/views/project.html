@@ -1,27 +1,51 @@
 <div ng-controller="ProjectController">
-    project测试{{}}
-    {{name}}
     <div class="row">
-        <div class="col-3">
+        <div class="col-md-4">
+            <div class="toolbar module-toolbar">
+                <select class="form-control" style="margin-bottom: 10px;" ng-model="module.versions" ng-options="version  for version in versions">
+                </select>
+                <div class="btn-group pull-right">
+                    <a href="" class="btn btn-default btn-xs" ng-click="newNode()">添加新模块</a>
+                    <a href="" class="btn btn-default btn-xs" ng-click="expandAll()">展开</a>
+                    <a href="" class="btn btn-default btn-xs" ng-click="collapseAll()">收起</a>
+                </div>
+            </div>
+
             <!-- 文件树 S -->
-            <div ui-tree>
+
+            <!-- Nested list template -->
+            <script type="text/ng-template" id="items_renderer.html">
+                <div ui-tree-handle>
+                    <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+                        <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                    </a>
+                    {{item.name}}
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-default btn-xs" data-nodrag ng-click="editNode(this)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-default btn-xs" data-nodrag ng-click="newNode(this)"><span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                        <a class="btn btn-default btn-xs" data-nodrag ng-click="remove(this)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
+                <ol ui-tree-nodes="options" ng-model="item.items" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="item in item.items" ui-tree-node ng-include="'items_renderer.html'"></li>
+                </ol>
+            </script>
+
+            <div id="tree-root" class="module-tree-root" ui-tree="treeOptions" data-drag-enabled="tree.enabled" data-max-depth="5" data-drag-delay="100">
                 <ol ui-tree-nodes="" ng-model="list">
-                    <li ng-repeat="item in list" ui-tree-node>
-                        <div ui-tree-handle>
-                            {{item.title}}
-                        </div>
-                        <ol ui-tree-nodes="" ng-model="item.items">
-                            <li ng-repeat="subItem in item.items" ui-tree-node>
-                                <div ui-tree-handle>
-                                    {{subItem.title}}
-                                </div>
-                            </li>
-                        </ol>
-                    </li>
+                    <li ng-repeat="item in list" ui-tree-node ng-include="'items_renderer.html'"></li>
                 </ol>
             </div>
             <!-- 文件树 E -->
 
+        </div>
+        <div class="col-md-8">
+            <div ui-view></div>
         </div>
     </div>
 </div>

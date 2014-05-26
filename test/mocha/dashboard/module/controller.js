@@ -23,14 +23,18 @@ describe('<dashboard modules controller test>', function() {
             member.push('binbin');
             postData = {
                 name:'卡拉',
-                description:'卡拉是一条狗_controller',
-                projectName:'啦啦_controller',
-                page:[{
+                desc:'卡拉是一条狗_controller',
+                projectId:'啦啦_controller',
+                author: 'binbin',
+                type: 'module',
+                items:[{
                     name:'葛优',
                     template:'/xx/xx/xx/xx.html',
-                    action:[{
+                    type: 'page',
+                    items:[{
                         name:'要签名',
-                        description:'要签名呀',
+                        desc:'要签名呀',
+                        type:'action',
                         request_type:'get',
                         request_url:'xx/xx/xx.action',
                         map_url:'xx/xx/xx.action',
@@ -52,7 +56,7 @@ describe('<dashboard modules controller test>', function() {
                         }]
                     }]
                 }]
-            }
+            };
 
 
             var request = superagent.agent();

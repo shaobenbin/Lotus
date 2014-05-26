@@ -8,4 +8,4 @@ var data = Mock.mock({
         'id|+1': 1
     }]
 });
-console.log(JSON.stringify(data, null, 4))
+//console.log(JSON.stringify(data, null, 4))
