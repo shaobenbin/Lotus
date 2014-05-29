@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-4">
             <div class="toolbar module-toolbar">
-                <select class="form-control" style="margin-bottom: 10px;" ng-model="module.versions" ng-options="version  for version in versions">
-                </select>
                 <div class="btn-group pull-right">
-                    <a href="" class="btn btn-default btn-xs" ng-click="newNode()">添加新模块</a>
+                    <a href="" class="btn btn-default btn-xs" ng-click="createModule()">添加新模块</a>
+                    <a href="" class="btn btn-default btn-xs" ng-click="createModule()">添加新页面</a>
+                    <a href="" class="btn btn-default btn-xs" ng-click="createModule()">添加新接口</a>
                     <a href="" class="btn btn-default btn-xs" ng-click="expandAll()">展开</a>
                     <a href="" class="btn btn-default btn-xs" ng-click="collapseAll()">收起</a>
                 </div>
@@ -20,6 +20,7 @@
                         <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                     </a>
                     {{item.name}}
+                    {{item.type}}
                     <div class="btn-group pull-right">
                         <a class="btn btn-default btn-xs" data-nodrag ng-click="editNode(this)">
                             <span class="glyphicon glyphicon-edit"></span>
@@ -45,7 +46,7 @@
 
         </div>
         <div class="col-md-8">
-            <div ui-view></div>
+            <div ui-view name="moduleContent"></div>
         </div>
     </div>
 </div>

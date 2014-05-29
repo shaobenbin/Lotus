@@ -4,13 +4,15 @@
 <div class="modal-body">
     <form role="form">
         <div class="form-group has-success has-feedback">
+            <label for="project_id">项目 id</label>
+            <input type="text" class="form-control" id="project_id" placeholder="项目 id" ng-model="module.projectId" disabled>
+        </div>
+        <div class="form-group has-success has-feedback">
             <label for="module_name">模块名称</label>
-
             <input type="text" class="form-control" id="module_name" placeholder="模块名称" ng-model="module.name">
         </div>
         <div class="form-group has-warning has-feedback">
             <label for="module_desc">模块描述</label>
-
             <input type="text" class="form-control" id="module_desc" placeholder="模块描述" ng-model="module.desc">
         </div>
     </form>

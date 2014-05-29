@@ -23,7 +23,9 @@
 .open>.dropdown-menu{display:block;overflow:auto;opacity:.99;filter:alpha(opacity=99)}
 .form-horizontal .form-group{margin-left:0;margin-right:0}
 .form-horizontal .form-group .form-control-select{width:100%}
-.form-control{height:40px;padding:8px 12px;-webkit-box-shadow:none;box-shadow:none}input.form-control,textarea.form-control{background-color:#fff;border:1px solid #d9d9d9;border-radius:3px;line-height:20px}input.form-control{height:40px;line-height:26px}
+.form-control{height:40px;padding:8px 12px;-webkit-box-shadow:none;box-shadow:none}
+input.form-control,textarea.form-control{background-color:#fff;border:1px solid #d9d9d9;border-radius:3px;line-height:20px}
+input.form-control{height:40px;line-height:26px}
 .form-control:focus{border-color:#a6a6a6;-webkit-box-shadow:none;box-shadow:none;outline:0}
 .form-control.btn-danger{background-color:#fb5a60;border-color:#fb5a60}
 .form-control-select{position:relative;display:inline-block}

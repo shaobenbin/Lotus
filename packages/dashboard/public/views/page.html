@@ -1,0 +1,28 @@
+<div ng-controller="ModuleController">
+    <h1>page</h1>
+    <div>
+        name:{
+        type: String,
+        required: true
+        },
+        template:{
+        type:String,
+        required:true
+        },
+    </div>
+    <div class="form-group has-success has-feedback">
+        <label class="control-label" for="inputSuccess2">name</label>
+        <input type="text" class="form-control" id="inputSuccess2">
+        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+    </div>
+    <div class="form-group has-warning has-feedback">
+        <label class="control-label" for="inputWarning2">desc</label>
+        <input type="text" class="form-control" id="inputWarning2">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+    </div>
+    <div class="form-group has-error has-feedback">
+        <a href="#" class="btn btn-warning pull-left">删除</a>
+        <a href="#" class="btn btn-primary pull-right" style="margin-left: 10px;">确认</a>
+        <a href="#" class="btn btn-default pull-right">取消</a>
+    </div>
+</div>

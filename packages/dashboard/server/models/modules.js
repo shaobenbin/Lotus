@@ -8,36 +8,38 @@ var ModulesSchema = new Schema({
         type: String,
         required: true
     },
-    desc:String,
+    desc:{
+        type: String
+    },
     projectId:{
-        type: String,
-        required: true
+        type: String
     },
     version:{
-        type:Number
+        type: String
     },
     author:{
-        type:String,
-        required: true
+        type:String
     },
     type: {
-        type: String,
-        required: true
+        type: String
     },
     items:[{
+        id: {
+            type: Schema.Types.ObjectId
+        },
         name:{
-            type: String,
-            required: true
+            type: String
         },
         template:{
-            type:String,
-            required:true
+            type:String
         },
         type: {
-            type: String,
-            required: true
+            type: String
         },
         items:[{
+            id: {
+                type: Schema.Types.ObjectId
+            },
             name:{
                 type:String
             },
@@ -45,8 +47,7 @@ var ModulesSchema = new Schema({
                 type:String
             },
             type: {
-                type: String,
-                required: true
+                type: String
             },
             request_type:{
                 type:String

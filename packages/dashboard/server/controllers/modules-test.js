@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Modules = mongoose.model('Modules');
+    Modules = mongoose.model('ModulesTest');
 
 exports.save = function (req, res) {
     var modules = new Modules(req.body);

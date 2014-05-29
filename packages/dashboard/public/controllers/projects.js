@@ -11,7 +11,7 @@ angular.module('mean')
              */
             $http.get('http://127.0.0.1:3000/api/organizations').success(function(organizations) {
                 $scope.organizations = organizations;
-                $http.get('http://127.0.0.1:3000/project/fetch').success(function(projects) {
+                $http.get('http://127.0.0.1:3000/api/project/fetch').success(function(projects) {
                     $scope.projects = projects;
                     $scope.personal = {};
                     $scope.personal.projects = [];
@@ -141,7 +141,7 @@ angular.module('mean')
                             'logo': $scope.project.logo,
                             'organization': $scope.project.organization
                         };
-                        $http.post('http://127.0.0.1:3000/project/create', newProject).success(function (data) {
+                        $http.post('http://127.0.0.1:3000/api/project/create', newProject).success(function (data) {
                             // 成功的话返回给前端渲染到页面上
                             // 暂时新用直接刷新页面的方式
                             $modalInstance.close({
