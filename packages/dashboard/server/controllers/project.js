@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+    CheckIn = mongoose.model('CheckIn'),
     Project = mongoose.model('Project'),
     _ = require('lodash');
 
@@ -15,6 +16,7 @@ exports.create = function (req, res) {
     project.created = dateNow;
     project.modified = dateNow;
     project.owner = req.user.username;
+    project.ownerId = req.user._id;
     project.member = [];
     project.member.push(req.user.username);
 
@@ -27,7 +29,7 @@ exports.create = function (req, res) {
         return res.status(400).send(errors);
     }
 
-    project.save(function (err) {
+    project.save(function (err,project) {
         if (err) {
             switch (err.code) {
                 default:
@@ -35,10 +37,29 @@ exports.create = function (req, res) {
             }
             return res.status(400);
         } else {
-            res.jsonp({success: '添加成功'});
+            res.status(200);
+            res.send(project);
         }
     });
 }
+
+exports.addModules = function(req,res){
+    var modules = req.body.modules;
+    var projectId = req.body.projectId;
+    Project.checkIn({_id:projectId},{modules:modules},null,function(err,project){
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(400).send('Please fill all the required fields');
+            }
+            return res.status(400);
+        } else {
+            res.status(200);
+            res.send("success");
+            return;
+        }
+    })
+};
 
 /**
  * 获取项目
@@ -46,14 +67,9 @@ exports.create = function (req, res) {
  * @param res
  */
 exports.fetch = function (req, res) {
-    var organization = req.body.organization,
-        username = req.user.username;
+    var username = req.user.username;
 
-//    if (!organization || organization === '个人') {
-//        organization = '个人';
-//    }
-
-    Project.find({owner: username}, function (err, projects) {
+    Project.find({member: username}, function (err, projects) {
         if (err) {
             switch (err.code) {
                 default:
@@ -72,15 +88,17 @@ exports.fetch = function (req, res) {
  * @param res
  */
 exports.fetchOne = function(req,res){
-    var username = req.user.username,
-        organization = req.body.organization,
-        name = req.body.name;
+//    var username = req.user.username,
+//        organization = req.body.organization,
+//        name = req.body.name;
+//
+//    if (!organization || organization === '个人') {
+//        organization = '个人';
+//    }
 
-    if (!organization || organization === '个人') {
-        organization = '个人';
-    }
+    var projectId = req.body.projectId;
 
-    Project.findOne({organization:organization,owner:username,name:name},function(err,project){
+    Project.findOne({_id:projectId},function(err,project){
         if (err) {
             switch (err.code) {
                 default:
@@ -90,7 +108,8 @@ exports.fetchOne = function(req,res){
         }
 
         res.status(200);
-        res.jsonp(project);
+        res.send(project);
+        return;
 
     });
 }
@@ -101,10 +120,11 @@ exports.fetchOne = function(req,res){
  * @param res
  */
 exports.del = function(req,res){
-    var name = req.body.name,
-        organization = req.body.organization,
-        username = req.user.username;
-    Project.findOne({name:name,organization:organization,owner:username},function(err,project){
+//    var name = req.body.name,
+//        organization = req.body.organization,
+//        username = req.user.username;
+    var projectId = req.body.projectId;
+    Project.findOne({_id:projectId},function(err,project){
         if (err) {
             switch (err.code) {
                 default:
@@ -127,6 +147,94 @@ exports.del = function(req,res){
                 res.jsonp({success: '添加成功'});
         });
     });
+}
+
+/**
+ * 查看某个版本的具体内容
+ * @param req
+ * @param res
+ */
+exports.queryVersion = function(req,res){
+    var objectName = 'project',
+        objectId = req.body.objectId;
+
+    CheckIn.find({objectName:objectName,objectId:objectId},function(err,checkIns){
+        if(err){
+            res.status(400);
+            res.send("err!");
+            return;
+        }
+
+        res.status(200);
+        res.send(checkIns);
+    });
+}
+
+/**
+ * 查看某个版本的信息
+ * @param req
+ * @param res
+ */
+exports.viewVersion = function(req,res){
+    var objectName = 'project',
+        version = req.body.version,
+        objectId = req.body.objectId;
+
+    CheckIn.findOne({objectName:objectName,objectId:objectId,versionId:version},function(err,checkIn){
+        if(err){
+            res.status(400);
+            res.send("err!");
+            return;
+        }
+
+        var objectData = checkIn.objectData;
+
+        if(objectName == "project"){
+            Project.findOne({_id:objectId},function(err,project){
+                project.modules=objectData;
+                project.version = version;
+                res.status(200);
+                res.send(project);
+                return;
+            });
+        }
+    });
+}
+
+/**
+ * 变更version
+ * @param req
+ * @param res
+ */
+exports.changeVersion = function(req,res){
+    var objectName = "project",
+        version = req.body.versionId,
+        objectId = req.body.objectId;
+    if(objectName == 'product'){
+        CheckIn.findOne({objectName:objectName,objectId:objectId,version:versionId},function(err,checkIn){
+            if(err){
+                res.status(400);
+                res.send("err!");
+                return;
+            }
+
+            var objectData = checkIn.objectData;
+            var now = Date.now();
+            Project.findOne({_id:objectId},{modules:objectData,version:version,updated:now},function(err){
+                if(err){
+                    res.status(400);
+                    res.send("err!");
+                    return;
+                }
+
+                res.status(200);
+                res.send('success');
+            })
+        });
+    }
+
+    res.status(400);
+    res.send("error object name!");
 }
 
 ///**

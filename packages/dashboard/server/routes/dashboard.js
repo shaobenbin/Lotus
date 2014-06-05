@@ -16,7 +16,14 @@ module.exports = function(Dashboard, app, auth, database) {
     app.post('/project/del', auth.requiresLogin, project.del);
     app.get('/project/fetch', auth.requiresLogin, project.fetch);
     app.get('/project/fetchOne', auth.requiresLogin, project.fetchOne);
-
+    //获取版本信息
+    app.get('/project/queryVersion', auth.requiresLogin, project.queryVersion);
+    //查看指定版本的project
+    app.get('/project/viewVersion', auth.requiresLogin, project.viewVersion);
+    //查看
+    app.get('/project/changeVersion',auth.requiresLogin,project.changeVersion);
+    //增加modules
+    app.get('/project/addmodules',auth.requiresLogin,project.addModules);
 
     //module相关
     var modules = require('../controllers/modules.js');
@@ -24,5 +31,6 @@ module.exports = function(Dashboard, app, auth, database) {
     app.post('/modules/fetch',auth.requiresLogin,modules.fetch);
     app.get('/modules/fetchofversion',auth.requiresLogin,modules.fetchOfVersion);
 
+    var mockjs = require('../controllers/mockjs.js');
+    app.get('/mockjs/generatedata',mockjs.generateData);
 };
-
