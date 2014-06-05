@@ -26,12 +26,9 @@ describe('<dashboard prject model test>', function () {
 
             project2 = new Project(data);
 
-            //project3 = new Project(data1);
-
-            //project4 = new Project(data1);
-
             done();
         });
+
         describe('scene 1', function () {
             it('should begin without the test user', function (done) {
                 Project.find({ name: '项目一' }, function (err, projects) {
@@ -44,11 +41,17 @@ describe('<dashboard prject model test>', function () {
                 project.save(done);
             });
 
-
             it('should show an error when try to save without name', function (done) {
                 project.name = '';
                 return project.save(function (err) {
                     should.exist(err);
+                    done();
+                });
+            });
+
+            it('should be able to update without problems',function(done){
+                Project.update({name:data.name},{desc:"哈可好看"},function(err,project){
+                    should.not.exist(err);
                     done();
                 });
             });
