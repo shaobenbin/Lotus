@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    CheckIn = mongoose.model('CheckIn'),
+    CommitLog = mongoose.model('CommitLog'),
     Schema = mongoose.Schema;
 
 
@@ -118,15 +118,15 @@ var ProjectSchema = new Schema({
 
 
 
-ProjectSchema.pre("update",function(next){
-    var self = this;
-    ProjectSchema.findOne({_id:this._id},function(err,product){
-        //先备份下原来的modules;
-        checkInData(product,self,next);
-    });
-});
+//ProjectSchema.pre("update",function(next){
+//    var self = this;
+//    ProjectSchema.findOne({_id:this._id},function(err,product){
+//        //先备份下原来的modules;
+//        commitLogData(product,self,next);
+//    });
+//});
 
-ProjectSchema.statics.checkIn = function(query,updateData,options,callback){
+ProjectSchema.statics.commit = function(query,updateData,options,callback){
     this.model('Project').find(query,function(err,doc){
         var next = function(realUpData){
             realUpData.updated = Date.now();
@@ -134,27 +134,29 @@ ProjectSchema.statics.checkIn = function(query,updateData,options,callback){
                 callback(err,result);
             });
         };
-        checkInData(doc,updateData,next);
+        commitLogData(doc,updateData,next);
     });
 };
 
 
-var checkInData = function(data,original,next){
+var commitLogData = function(data,original,next){
     data = data[0];
-    var checkInData = {};
-    checkInData['ownerId'] = data.ownerId;
-    checkInData['owner'] = data.owner;
-    checkInData['objectName'] = 'product';
-    checkInData['objectId'] = data._id;
-    checkInData['objectData'] = original.modules;
-    var checkIn = new CheckIn(checkInData);
-    checkIn.save(function(err,checkIn){
+    var commitData = data;
+    commitData.modules = original.modules;
+    var commitLogData = {};
+    commitLogData['ownerId'] = data.ownerId;
+    commitLogData['owner'] = data.owner;
+    commitLogData['objectName'] = 'project';
+    commitLogData['objectId'] = data._id;
+    commitLogData['objectData'] = commitData;
+    var commitLog = new CommitLog(commitLogData);
+    commitLog.save(function(err,commitLogResult){
         if(err){
             console.log(err);
             return false;
         }
         //获取备份的版本号.
-        original.version = checkIn.version;
+        original.version = commitLogResult.version;
         next(original);
     })
 }
