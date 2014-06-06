@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    CheckIn = mongoose.model('CheckIn'),
+    CommitLog = mongoose.model('CommitLog'),
     Project = mongoose.model('Project'),
     _ = require('lodash');
 
@@ -46,7 +46,7 @@ exports.create = function (req, res) {
 exports.addModules = function(req,res){
     var modules = req.body.modules;
     var projectId = req.body.projectId;
-    Project.checkIn({_id:projectId},{modules:modules},null,function(err,project){
+    Project.commit({_id:projectId},{modules:modules},null,function(err,project){
         if (err) {
             switch (err.code) {
                 default:
@@ -62,11 +62,32 @@ exports.addModules = function(req,res){
 };
 
 /**
- * 获取项目
+ * 获取未存档的项目
  * @param req
  * @param res
  */
 exports.fetch = function (req, res) {
+    var username = req.user.username;
+
+    Project.find({member: username,isSaveFile:0}, function (err, projects) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(400).send(err.message);
+            }
+            return res.status(400);
+        }
+        res.status(200);
+        res.jsonp(projects);
+    });
+}
+
+/**
+ * 获取所有项目
+ * @param req
+ * @param res
+ */
+exports.fetchAll = function (req, res) {
     var username = req.user.username;
 
     Project.find({member: username}, function (err, projects) {
@@ -149,6 +170,22 @@ exports.del = function(req,res){
     });
 }
 
+exports.save2File = function(req,res){
+    var projectId = req.body.projectId;
+    Project.update({_id:projectId},{isSaveFile:1},function(err,rows){
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(400).send(err.message);
+            }
+            return res.status(400);
+        }
+
+        res.status(200);
+        res.jsonp({success: '归档成功!'});
+    });
+}
+
 /**
  * 查看某个版本的具体内容
  * @param req
@@ -158,7 +195,7 @@ exports.queryVersion = function(req,res){
     var objectName = 'project',
         objectId = req.body.objectId;
 
-    CheckIn.find({objectName:objectName,objectId:objectId},function(err,checkIns){
+    CommitLog.find({objectName:objectName,objectId:objectId},function(err,commitLogs){
         if(err){
             res.status(400);
             res.send("err!");
@@ -166,7 +203,7 @@ exports.queryVersion = function(req,res){
         }
 
         res.status(200);
-        res.send(checkIns);
+        res.send(commitLogs);
     });
 }
 
@@ -178,16 +215,19 @@ exports.queryVersion = function(req,res){
 exports.viewVersion = function(req,res){
     var objectName = 'project',
         version = req.body.version,
-        objectId = req.body.objectId;
+        objectId = req.body.projectId;
 
-    CheckIn.findOne({objectName:objectName,objectId:objectId,versionId:version},function(err,checkIn){
+    CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
         if(err){
             res.status(400);
             res.send("err!");
             return;
         }
 
-        var objectData = checkIn.objectData;
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        console.log(commitLog);
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        var objectData = commitLog.objectData;
 
         if(objectName == "project"){
             Project.findOne({_id:objectId},function(err,project){
@@ -208,33 +248,30 @@ exports.viewVersion = function(req,res){
  */
 exports.changeVersion = function(req,res){
     var objectName = "project",
-        version = req.body.versionId,
-        objectId = req.body.objectId;
-    if(objectName == 'product'){
-        CheckIn.findOne({objectName:objectName,objectId:objectId,version:versionId},function(err,checkIn){
+        version = req.body.version,
+        objectId = req.body.projectId;
+    if(objectName == 'project'){
+        CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
             if(err){
                 res.status(400);
                 res.send("err!");
                 return;
             }
 
-            var objectData = checkIn.objectData;
-            var now = Date.now();
-            Project.findOne({_id:objectId},{modules:objectData,version:version,updated:now},function(err){
+            var modules = commitLog.objectData.modules;
+            //objectData.version = version;
+            //var now = Date.now();
+            Project.update({_id:objectId},{version:version,modules:modules},function(err,rows){
                 if(err){
                     res.status(400);
                     res.send("err!");
-                    return;
                 }
 
                 res.status(200);
                 res.send('success');
-            })
+            });
         });
     }
-
-    res.status(400);
-    res.send("error object name!");
 }
 
 ///**
