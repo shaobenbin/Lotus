@@ -44,7 +44,6 @@ angular.module('mean')
             })
             .state('otherwise', {
                 url: '*path',
-
                 templateUrl: 'dashboard/views/404.html'
             });
 

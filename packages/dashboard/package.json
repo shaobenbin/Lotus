@@ -1,9 +1,9 @@
 {
     "name": "dashboard",
     "version": "0.0.1",
-    "description": "lanxi",
+    "description": "",
     "author": {
-        "name": "lanxi"
+        "name": ""
     },
     "mean": true,
     "engines": {
