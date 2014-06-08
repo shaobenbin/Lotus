@@ -36,7 +36,7 @@ describe('关于项目的测试', function () {
     describe('project 场景', function () {
         it('能够创建一个项目', function (done) {
             var request = superagent.agent();
-            request.post('http://localhost:3000/project/create')
+            request.put('http://localhost:3000/project')
                 .send(postData)
                 .set('cookie', cookie)
                 .end(function (res) {
@@ -82,8 +82,8 @@ describe('关于项目的测试', function () {
             };
 
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/addmodules')
-                .send({projectId:project._id,modules:modules})
+            request.post('http://localhost:3000/project/'+project._id)
+                .send({modules:modules})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -95,8 +95,8 @@ describe('关于项目的测试', function () {
 
         it('根据项目编号查询项目详情', function (done) {
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/fetchOne')
-                .send({projectId:project._id})
+            request.get('http://localhost:3000/project/'+project._id)
+                .send({})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -141,8 +141,8 @@ describe('关于项目的测试', function () {
             };
 
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/addmodules')
-                .send({projectId:project._id,modules:modules})
+            request.post('http://localhost:3000/project/'+project._id)
+                .send({modules:modules})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -153,8 +153,8 @@ describe('关于项目的测试', function () {
 
         it('更新后的项目版本号加1', function (done) {
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/fetchOne')
-                .send({projectId:project._id})
+            request.get('http://localhost:3000/project/'+project._id)
+                .send({})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -166,8 +166,8 @@ describe('关于项目的测试', function () {
 
         it('查看当前项目的版本历史',function(done){
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/queryVersion')
-                .send({projectId:project._id})
+            request.get('http://localhost:3000/project/'+project._id+"/version")
+                .send({})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -177,8 +177,8 @@ describe('关于项目的测试', function () {
 
         it('查看某个版本的项目',function(done){
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/viewVersion')
-                .send({projectId:project._id,version:first_version})
+            request.get('http://localhost:3000/project/'+project._id+"/version/"+first_version)
+                .send({})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -188,8 +188,8 @@ describe('关于项目的测试', function () {
 
         it('回滚到某个版本号',function(done){
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/changeVersion')
-                .send({projectId:project._id,version:first_version})
+            request.post('http://localhost:3000/project/'+project._id+"/version/"+first_version)
+                .send({})
                 .set('cookie', cookie)
                 .end(function (res) {
                     res.status.should.equal(200);
@@ -199,7 +199,7 @@ describe('关于项目的测试', function () {
 
         it('查看当前用户的所有项目', function (done) {
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/fetch')
+            request.get('http://localhost:3000/project')
                 .send({})
                 .set('cookie',cookie)
                 .end(function (res) {
@@ -212,7 +212,7 @@ describe('关于项目的测试', function () {
 
         it('项目归档',function (done){
             var request = superagent.agent();
-            request.get('http://localhost:3000/project/save2File')
+            request.post('http://localhost:3000/project/'+project._id+"/notwork")
                 .send({projectId:project._id})
                 .set('cookie',cookie)
                 .end(function (res) {
@@ -225,8 +225,9 @@ describe('关于项目的测试', function () {
     describe('模拟数据', function () {
         it('错误的url获取模拟数据会出错', function (done) {
             var request = superagent.agent();
-            request.get('http://localhost:3000/mockjs/generatedata')
-                .send({projectId:project._id,requestUrl:'/style/star'})
+            var url = encodeURIComponent('/style/star');
+            request.get('http://localhost:3000/mockjs/project/'+project._id+"/"+url)
+                .send({})
                 .end(function (res) {
                     res.status.should.equal(400);
                     done();
@@ -235,8 +236,9 @@ describe('关于项目的测试', function () {
 
         it('正确的url获取模拟数据是正确的', function (done) {
             var request = superagent.agent();
-            request.get('http://localhost:3000/mockjs/generatedata')
-                .send({projectId:project._id,requestUrl:'/style/blog'})
+            var url = encodeURIComponent('/style/blog');
+            request.get('http://localhost:3000/mockjs/project/'+project._id+"/"+url)
+                .send({})
                 .end(function (res) {
                     res.status.should.equal(200);
                     console.log("********************************");
