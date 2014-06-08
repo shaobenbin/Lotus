@@ -45,7 +45,7 @@ exports.create = function (req, res) {
 
 exports.addModules = function(req,res){
     var modules = req.body.modules;
-    var projectId = req.body.projectId;
+    var projectId = req.params.id;
     Project.commit({_id:projectId},{modules:modules},null,function(err,project){
         if (err) {
             switch (err.code) {
@@ -117,7 +117,7 @@ exports.fetchOne = function(req,res){
 //        organization = '个人';
 //    }
 
-    var projectId = req.body.projectId;
+    var projectId = req.params.id;
 
     Project.findOne({_id:projectId},function(err,project){
         if (err) {
@@ -144,7 +144,7 @@ exports.del = function(req,res){
 //    var name = req.body.name,
 //        organization = req.body.organization,
 //        username = req.user.username;
-    var projectId = req.body.projectId;
+    var projectId = req.params.id;
     Project.findOne({_id:projectId},function(err,project){
         if (err) {
             switch (err.code) {
@@ -171,7 +171,7 @@ exports.del = function(req,res){
 }
 
 exports.save2File = function(req,res){
-    var projectId = req.body.projectId;
+    var projectId = req.params.id;
     Project.update({_id:projectId},{isSaveFile:1},function(err,rows){
         if (err) {
             switch (err.code) {
@@ -193,7 +193,8 @@ exports.save2File = function(req,res){
  */
 exports.queryVersion = function(req,res){
     var objectName = 'project',
-        objectId = req.body.objectId;
+        //objectId = req.body.objectId;
+         objectId = req.params.id;
 
     CommitLog.find({objectName:objectName,objectId:objectId},function(err,commitLogs){
         if(err){
@@ -214,8 +215,8 @@ exports.queryVersion = function(req,res){
  */
 exports.viewVersion = function(req,res){
     var objectName = 'project',
-        version = req.body.version,
-        objectId = req.body.projectId;
+        version = req.params.versionId,
+        objectId = req.params.id;
 
     CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
         if(err){
@@ -224,9 +225,6 @@ exports.viewVersion = function(req,res){
             return;
         }
 
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        console.log(commitLog);
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         var objectData = commitLog.objectData;
 
         if(objectName == "project"){
@@ -248,8 +246,8 @@ exports.viewVersion = function(req,res){
  */
 exports.changeVersion = function(req,res){
     var objectName = "project",
-        version = req.body.version,
-        objectId = req.body.projectId;
+        version = req.params.versionId,
+        objectId = req.params.id;
     if(objectName == 'project'){
         CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
             if(err){
