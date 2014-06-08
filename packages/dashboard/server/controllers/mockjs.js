@@ -16,8 +16,8 @@ var data = Mock.mock({
 });
 
 exports.generateData = function(req,res){
-    var projectId = req.body.projectId;
-    var request_url = req.body.requestUrl;
+    var projectId = req.params.id,
+        request_url = req.params.url;
     Project.findOne({_id:projectId},function(err,project){
         if(err){
             switch (err.code) {
