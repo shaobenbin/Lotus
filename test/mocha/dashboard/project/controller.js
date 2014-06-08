@@ -252,15 +252,14 @@ describe('关于项目的测试', function () {
     });
 
     after(function (done) {
-//        var request = superagent.agent();
-//        request.post('http://localhost:3000/project/del')
-//            .send({projectId:project._id})
-//            .set('cookie', cookie)
-//            .end(function (res) {
-//                res.status.should.equal(200);
-//                done();
-//            });
-        done();
+        var request = superagent.agent();
+        request.del('http://localhost:3000/project/'+project._id)
+            .send({})
+            .set('cookie', cookie)
+            .end(function (res) {
+                res.status.should.equal(200);
+                done();
+            });
     });
 });
 
