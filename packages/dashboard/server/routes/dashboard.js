@@ -12,24 +12,28 @@ module.exports = function(Dashboard, app, auth, database) {
 
     // 项目相关
     var project = require('../controllers/project.js');
-    app.post('/project/create', auth.requiresLogin, project.create);
-    app.post('/project/del', auth.requiresLogin, project.del);
-    //获取的是未存档的项目
-    app.get('/project/fetch', auth.requiresLogin, project.fetch);
-    //根据项目编号获取项目详情
-    app.get('/project/fetchOne', auth.requiresLogin, project.fetchOne);
+    //新增项目
+    app.put('/project', auth.requiresLogin, project.create);
+    //删除项目
+    app.delete('/project/:id', auth.requiresLogin, project.del);
+    //获取的是工作中的项目,为了描述资源是正在工作的project
+    app.get('/onwork/project', auth.requiresLogin, project.fetch);
+    //根据项目编号获取项目详情,
+    app.get('/project/:id', auth.requiresLogin, project.fetchOne);
     //获取所有项目
-    app.get('/project/fetchAll', auth.requiresLogin, project.fetchAll);
-    //获取版本信息
-    app.get('/project/queryVersion', auth.requiresLogin, project.queryVersion);
-    //查看指定版本的project
-    app.get('/project/viewVersion', auth.requiresLogin, project.viewVersion);
-    //查看
-    app.get('/project/changeVersion',auth.requiresLogin,project.changeVersion);
+    app.get('/project', auth.requiresLogin, project.fetchAll);
     //增加modules
-    app.get('/project/addmodules',auth.requiresLogin,project.addModules);
+    app.post('/project/:id',auth.requiresLogin,project.addModules);
+    //获取版本信息
+    app.get('/project/:id/version', auth.requiresLogin, project.queryVersion);
+    //查看指定版本的project
+    app.get('/project/:id/version/:versionId', auth.requiresLogin, project.viewVersion);
+    //查看
+    app.post('/project/:id/version/:versionId',auth.requiresLogin,project.changeVersion);
+
+
     //项目归档
-    app.get('/project/save2File',auth.requiresLogin,project.save2File);
+    app.post('/project/:id/notwork',auth.requiresLogin,project.save2File);
 
 //    //module相关
 //    var modules = require('../controllers/modules.js');
@@ -38,5 +42,5 @@ module.exports = function(Dashboard, app, auth, database) {
 //    app.get('/modules/fetchofversion',auth.requiresLogin,modules.fetchOfVersion);
 
     var mockjs = require('../controllers/mockjs.js');
-    app.get('/mockjs/generatedata',mockjs.generateData);
+    app.get('/mockjs/project/:id/:url',mockjs.generateData);
 };
