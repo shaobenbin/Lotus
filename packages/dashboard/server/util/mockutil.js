@@ -1,4 +1,3 @@
-
 var Mock = require('mockjs');
 
 exports.preMock = function(param){

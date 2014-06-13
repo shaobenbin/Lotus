@@ -8,38 +8,36 @@ var ModulesSchema = new Schema({
         type: String,
         required: true
     },
-    desc:{
-        type: String
-    },
+    desc:String,
     projectId:{
-        type: String
+        type: String,
+        required: true
     },
     version:{
-        type: String
+        type:Number
     },
     author:{
-        type:String
+        type:String,
+        required: true
     },
     type: {
-        type: String
+        type: String,
+        required: true
     },
     items:[{
-        id: {
-            type: Schema.Types.ObjectId
-        },
         name:{
-            type: String
+            type: String,
+            required: true
         },
         template:{
-            type:String
+            type:String,
+            required:true
         },
         type: {
-            type: String
+            type: String,
+            required: true
         },
         items:[{
-            id: {
-                type: Schema.Types.ObjectId
-            },
             name:{
                 type:String
             },
@@ -47,7 +45,8 @@ var ModulesSchema = new Schema({
                 type:String
             },
             type: {
-                type: String
+                type: String,
+                required: true
             },
             request_type:{
                 type:String
@@ -58,46 +57,90 @@ var ModulesSchema = new Schema({
             map_url:{
                 type:String
             },
-            request_parameter:[{
-                name:{
-                    type:String
-                },
-                identifier:{
-                    type:String
-                },
-                data_type:{
-                    type:String
-                },
-                remark:{
-                    type:String
-                },
-                expression:{
-                    type:String
-                },
-                mock_data:{
-                    type:String
-                }
-            }],
-            response_parameter:[{
-                name:{
-                    type:String
-                },
-                identifier:{
-                    type:String
-                },
-                data_type:{
-                    type:String
-                },
-                remark:{
-                    type:String
-                },
-                expression:{
-                    type:String
-                },
-                mock_data:{
-                    type:String
-                }
-            }]
+            request_parameter:{
+                type:Object
+            },
+            response_parameter:{
+                type:Object
+            }
+//            request_parameter:[{
+//                name:{
+//                    type:String
+//                },
+//                identifier:{
+//                    type:String
+//                },
+//                data_type:{
+//                    type:String
+//                },
+//                remark:{
+//                    type:String
+//                },
+//                expression:{
+//                    type:String
+//                },
+//                mock_data:{
+//                    type:String
+//                }
+//            }], request_parameter:[{
+//                name:{
+//                    type:String
+//                },
+//                identifier:{
+//                    type:String
+//                },
+//                data_type:{
+//                    type:String
+//                },
+//                remark:{
+//                    type:String
+//                },
+//                expression:{
+//                    type:String
+//                },
+//                mock_data:{
+//                    type:String
+//                }
+//            }], request_parameter:[{
+//                name:{
+//                    type:String
+//                },
+//                identifier:{
+//                    type:String
+//                },
+//                data_type:{
+//                    type:String
+//                },
+//                remark:{
+//                    type:String
+//                },
+//                expression:{
+//                    type:String
+//                },
+//                mock_data:{
+//                    type:String
+//                }
+//            }],
+//            response_parameter:[{
+//                name:{
+//                    type:String
+//                },
+//                identifier:{
+//                    type:String
+//                },
+//                data_type:{
+//                    type:String
+//                },
+//                remark:{
+//                    type:String
+//                },
+//                expression:{
+//                    type:String
+//                },
+//                mock_data:{
+//                    type:String
+//                }
+//            }]
         }]
     }]
 });
@@ -122,5 +165,5 @@ ModulesSchema.pre('save', function(next) {
                 }
                 next();
             }
-    });
+        });
 });

@@ -16,8 +16,10 @@ Dashboard.register(function (app, auth, database) {
         menu: 'main'
     });
 
+    // 引入模块资源
     Dashboard.aggregateAsset('css','dashboard.css');
-    Dashboard.aggregateAsset('css','project.css');
+    Dashboard.aggregateAsset('css', 'project.css');
+    Dashboard.aggregateAsset('css', 'projects.css');
 
     return Dashboard;
 });

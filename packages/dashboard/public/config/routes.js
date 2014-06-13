@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('mean')
-    .config(['$stateProvider',
-    // @see http://www.angularjs.cn/A00x
-    function($stateProvider) {
-        // @see https://github.com/angular-ui/ui-router/wiki
+    .config(['$stateProvider', function($stateProvider) {
         $stateProvider
             .state('dashboard', {
                 url: '/dashboard',
@@ -15,8 +12,8 @@ angular.module('mean')
                 templateUrl: 'dashboard/views/projects.html'
             })
             .state('dashboard.project', {
-                url: '/project/:id',
-                templateUrl: 'dashboard/views/project.html'
+                url: '/project/:projectId',
+                templateUrl: 'dashboard/views/project.html',
             })
             .state('dashboard.project.module', {
                 url: '/module/:moduleId',
@@ -24,6 +21,9 @@ angular.module('mean')
                     moduleContent: {
                         templateUrl: 'dashboard/views/module.html'
                     }
+                },
+                resolve: {
+
                 }
             })
             .state('dashboard.project.page', {
@@ -46,6 +46,5 @@ angular.module('mean')
                 url: '*path',
                 templateUrl: 'dashboard/views/404.html'
             });
-
     }
 ]);

@@ -12,7 +12,7 @@ var express = require('express'),
     util = require('./util'),
     assetmanager = require('assetmanager');
 
-module.exports = function(app, passport, db) {
+module.exports = function (app, passport, db) {
     app.set('showStackError', true);
 
     // Prettify HTML
@@ -24,7 +24,7 @@ module.exports = function(app, passport, db) {
     // Should be placed before express.static
     // To ensure that all assets and data are compressed (utilize bandwidth)
     app.use(express.compress({
-        filter: function(req, res) {
+        filter: function (req, res) {
             return (/^text\//).test(res.getHeader('Content-Type'));
         },
         // Levels are specified in a range of 0 to 9, where-as 0 is
@@ -51,7 +51,7 @@ module.exports = function(app, passport, db) {
     // Enable jsonp
     app.enable('jsonp callback');
 
-    app.configure(function() {
+    app.configure(function () {
         // The cookieParser should be above session
         app.use(express.cookieParser());
 
@@ -74,7 +74,7 @@ module.exports = function(app, passport, db) {
 
         // 资源赋值给本地变量
         // Add assets to local variables
-        app.use(function(req, res, next) {
+        app.use(function (req, res, next) {
             res.locals({
                 assets: assetmanager.assets
             });
@@ -111,17 +111,17 @@ module.exports = function(app, passport, db) {
         app.use(express.favicon());
         app.use('/public', express.static(config.root + '/public'));
 
-        app.get('/modules/aggregated.js', function(req, res) {
+        app.get('/modules/aggregated.js', function (req, res) {
             res.setHeader('content-type', 'text/javascript');
             res.send(mean.aggregated.js);
         });
 
-        app.get('/modules/aggregated.css', function(req, res) {
+        app.get('/modules/aggregated.css', function (req, res) {
             res.setHeader('content-type', 'text/css');
             res.send(mean.aggregated.css);
         });
 
-        mean.events.on('modulesFound', function() {
+        mean.events.on('modulesFound', function () {
 
             for (var name in mean.modules) {
                 app.use('/' + name, express.static(config.root + '/' + mean.modules[name].source + '/' + name + '/public'));
@@ -131,7 +131,7 @@ module.exports = function(app, passport, db) {
                 // Skip the app/routes/middlewares directory as it is meant to be
                 // used and shared by routes as further middlewares and is not a
                 // route by itself
-                util.walk(appPath + '/server/routes', 'middlewares', function(path) {
+                util.walk(appPath + '/server/routes', 'middlewares', function (path) {
                     require(path)(app, passport);
                 });
             }
@@ -144,9 +144,9 @@ module.exports = function(app, passport, db) {
             // Assume "not found" in the error msgs is a 404. this is somewhat
             // silly, but valid, you can do whatever you like, set properties,
             // use instanceof etc.
-            app.use(function(err, req, res, next) {
+            app.use(function (err, req, res, next) {
                 // Treat as 404
-                if (~err.message.indexOf('not found')) return next();
+                if (~err.message.indexOf('not found')) { return next();}
 
                 // Log it
                 console.error(err.stack);
@@ -158,7 +158,7 @@ module.exports = function(app, passport, db) {
             });
 
             // Assume 404 since no middleware responded
-            app.use(function(req, res) {
+            app.use(function (req, res) {
                 res.status(404).render('404', {
                     url: req.originalUrl,
                     error: 'Not found'

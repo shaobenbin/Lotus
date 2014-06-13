@@ -23,9 +23,6 @@
 .open>.dropdown-menu{display:block;overflow:auto;opacity:.99;filter:alpha(opacity=99)}
 .form-horizontal .form-group{margin-left:0;margin-right:0}
 .form-horizontal .form-group .form-control-select{width:100%}
-.form-control{height:40px;padding:8px 12px;-webkit-box-shadow:none;box-shadow:none}
-input.form-control,textarea.form-control{background-color:#fff;border:1px solid #d9d9d9;border-radius:3px;line-height:20px}
-input.form-control{height:40px;line-height:26px}
 .form-control:focus{border-color:#a6a6a6;-webkit-box-shadow:none;box-shadow:none;outline:0}
 .form-control.btn-danger{background-color:#fb5a60;border-color:#fb5a60}
 .form-control-select{position:relative;display:inline-block}
@@ -64,7 +61,7 @@ input.form-control{height:40px;line-height:26px}
 .modal-backdrop.fade.in{opacity:.7;filter:alpha(opacity=70)}
 .modal-backdrop.fade{opacity:0}
 .modal{overflow-x:hidden;overflow-y:auto;display:block;z-index:105}
-.modal.in .modal-dialog{-webkit-transition:none;transition:none;-webkit-transform:none;-moz-transform:none;-ms-transform:none;-o-transform:none;transform:none}
+.modal.in .modal-dialog{transform:none}
 .modal label{font-weight:normal}
 .modal .modal-dialog{width:600px;margin:50px auto;border:0 none;background-color:#fff;border-radius:3px;color:#383838;font-size:14px;-webkit-box-shadow:none;box-shadow:none}
 .modal .modal-dialog.modal-padding{padding:20px}

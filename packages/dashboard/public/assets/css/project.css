@@ -1,30 +1,79 @@
-/* ui-tree */
-.angular-ui-tree-handle {
-    background: #f8faff;
-    border: 1px solid #dae2ea;
-    color: #7c9eb2;
-    padding: 10px 10px;
+/* @author lanxi*/
+.row-form {
+    display: none;
+}
+.project-info {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+.project-profile {
+
+}
+.project-profile h3 {
+    margin: 0;
+}
+.btn-project-actions {
+
+}
+.bs-docs-container {
+    clear: both;
+    background-color: #fff;
+}
+/* @author qingye */
+.display_u{
+    display: inline-block;
 }
 
-.angular-ui-tree-handle:hover {
-    color: #438eb9;
-    background: #f4f6f7;
-    border-color: #dce2e8;
+.list ul{
+    padding-left: 20px;
+}
+.list li{
+    line-height: 38px;
+    border-bottom: 1px dashed #dedede;
+    font-size: 14px;
+}
+.list span{
+    color: #999;
+    cursor: pointer;
 }
 
-.angular-ui-tree-placeholder {
-    background: #f0f9ff;
-    border: 2px dashed #bed2db;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.list .oneline ul{
+    display: none;
 }
 
-/* module-toolbar */
-.module-toolbar {
-    margin-bottom: 10px;
-    overflow: hidden;
+.listLi{
+    position: relative;
+    border-bottom: 1px dashed #dedede;
+    margin-bottom: -1px;
 }
-.module-tree-root {
-    margin-bottom: 10px;
+.listLi .ismod{
+    color: #428BCA
+}
+.listLi .title .glyphicon-bell{
+    padding-left: 5px;
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+.listLi .toolbar{
+    font-size: 14px;
+}
+
+.listLi .toolbar .glyphicon{
+    margin-right: 15px;
+}
+.listLi .toolbar .glyphicon-transfer,
+.listLi .toolbar .glyphicon-cloud-download{
+    color: #57a000
+}
+.listLi .toolbar .glyphicon-send{
+    color: #F39
+}
+.listLi .toolbar .glyphicon-check{
+    color: #ffc000
+}
+
+.list .showoneline ul{
+    display: none;
 }

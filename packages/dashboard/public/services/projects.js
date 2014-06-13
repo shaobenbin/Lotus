@@ -4,7 +4,7 @@
  * 项目列表页相关 service
  */
 angular.module('mean')
-    .service('ProjectList', ['Organization','Project', function (Organization, Project) {
+    .service('ProjectList', ['Organization', 'Project', function (Organization, Project) {
 
         /**
          * 查询项目列表
