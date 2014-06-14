@@ -1,6 +1,6 @@
 /**
  * for intercept jquery ajax
- * 2014.6.14
+ * 2014.6.14 @binbin
  *
  * lutos的插件JS的使用说明
  *
