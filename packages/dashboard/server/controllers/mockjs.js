@@ -22,9 +22,11 @@ exports.generateData = function(req,res){
         if(err){
             switch (err.code) {
                 default:
-                    res.status(400).send('Please fill all the required fields');
+                    res.status(200).send({code:4004,result:{errorMsg:'not find project!'}});
+                    return;
             }
-            return res.status(400);
+            res.status(200).send({code:4004,result:{errorMsg:'undefined error!'}});
+            return;
         }
 
 
@@ -40,16 +42,24 @@ exports.generateData = function(req,res){
                     if(subItem.request_url == request_url){
                         var response_parameter = subItem.response_parameter;
                         var rule = MockUtil.preMock(response_parameter);
+                        if(!rule){
+                            res.status(200).send({code:4004,result:{errorMsg:'error response parameter!'}});
+                            return;
+                        }
                         var mockData = MockUtil.mock(rule);
+                        if(!mockData){
+                            res.status(200).send({code:4004,result:{errorMsg:'error rule!'}});
+                            return;
+                        }
                         res.status(200);
-                        res.send(mockData);
+                        res.send({code:1001,result:mockData});
                         return;
                     }
                 }
             }
         }
 
-        res.status(400).send('not request url match!');
+        res.status(200).send({code:4004,result:{errorMsg:'not find action!'}});
     });
 }
 
