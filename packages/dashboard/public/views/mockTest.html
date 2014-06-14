@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LOTUS Example</title>
+    <!-- 引入LOTUS开始 -->
+    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script src="http://localhost:3000/dashboard/assets/plugin/lotus.js?projectId=539acf4e807daf0000cd8161"></script>
+    <!-- 引入LOTUS结束 -->
+</head>
+<body>
+<div id="container"></div>
+<script>
+    $.ajax({
+        type:"POST",
+        url:"blog",
+        dataType:"json",
+        success:function(data){
+            //var obj = eval(dataString);
+            $('#container').html(JSON.stringify(data, null, 4))
+        },
+        error: function(err){
+           // alert(XMLHttpRequest.readyState);
+            $('#container').html('error,'+err.errorMsg);
+        }
+    })
+    if(lotus){
+        lotus.setNotInterceptReqUrl(['/blog']);
+    }
+</script>
+</body>
+</html>
