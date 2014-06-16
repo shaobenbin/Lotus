@@ -128,13 +128,27 @@ describe('关于项目的测试', function () {
 
                         },
                         response_parameter:{
-                            userId:{desc:'用户id',value:'number',remark:'haha'},
-                            userName:{desc:'用户名',
-                                value:[{
-                                    key1:{value:'a',remark:'@time'},key2:{value:'b'}
+                            "userId": {
+                                "desc": "用户id",
+                                "value": "number",
+                                "remark": "haha"
+                            },
+                            "userName":{
+                                "desc":"用户名",
+                                "value":[{
+                                    "key1":{
+                                        "value":"a",
+                                        "remark":"@time"
+                                    },
+                                    "key2":{
+                                        "value":"b"
+                                    }
                                 }],
-                                remark:'lal'},
-                            isDeleted:{value:'boolean'}
+                                "remark":"lal"
+                            },
+                            "isDeleted": {
+                                "value":"boolean"
+                            }
                         }
                     }]
                 }]

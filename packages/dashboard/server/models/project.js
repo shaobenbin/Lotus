@@ -23,58 +23,49 @@ var ModulesSchema = new Schema({
 //        type: String,
 //        required: true
 //    },
-    // 页面
-    items: [
-        {
-            name: {
-                type: String,
-                required: true
-            },
-            template: {
-                type: String,
-                required: true
-            },
+
+    items:[{
+        name:{
+            type: String,
+            required: true
+        },
+        template:{
+            type:String,
+            required:true
+        },
 //        type: {
 //            type: String,
 //            required: true
 //        },
-            // 接口
-            items: [
-                {
-                    name: {
-                        type: String
-                    },
-                    desc: {
-                        type: String
-                    },
-                    type: {
-                        type: String,
-                        required: true
-                    },
-                    // 请求类型
-                    request_type: {
-                        type: String
-                    },
-                    // 请求路径
-                    request_url: {
-                        type: String
-                    },
-                    // 童虎接口路径
-                    map_url: {
-                        type: String
-                    },
-                    // 请求参数
-                    request_parameter: {
-                        type: Object
-                    },
-                    // 响应参数
-                    response_parameter: {
-                        type: Object
-                    }
-                }
-            ]
-        }
-    ]
+
+        items:[{
+            name:{
+                type:String
+            },
+            desc:{
+                type:String
+            },
+            type: {
+                type: String,
+                required: true
+            },
+            request_type:{
+                type:String
+            },
+            request_url:{
+                type:String
+            },
+            map_url:{
+                type:String
+            },
+            request_parameter:{
+                type:Object
+            },
+            response_parameter:{
+                type:Object
+            }
+        }]
+    }]
 });
 
 /**
@@ -82,8 +73,8 @@ var ModulesSchema = new Schema({
  */
 var ProjectSchema = new Schema({
     //版本号
-    version: {
-        type: Number
+    version:{
+        type:Number
     },
     name: {
         type: String,
@@ -115,6 +106,7 @@ var ProjectSchema = new Schema({
             required: true
         }
     ],
+
     created: {
         date: Date
     },
@@ -152,6 +144,7 @@ ProjectSchema.statics.commit = function (query, updateData, options, callback) {
 
 
 var commitLogData = function (data, original, next) {
+
     data = data[0];
     var commitData = data;
     commitData.modules = original.modules;
@@ -172,6 +165,7 @@ var commitLogData = function (data, original, next) {
         next(original);
     })
 }
+
 
 mongoose.model('Project', ProjectSchema);
 

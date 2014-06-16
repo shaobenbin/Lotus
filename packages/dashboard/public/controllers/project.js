@@ -165,9 +165,11 @@ angular.module('mean')
              * 创建接口
              */
             $scope.createInterface = function (modulesIndex, pageIndex) {
-                $scope.project.modules[modulesIndex].items[pageIndex].items.push($scope.newInterface);
+                var newInterface = $scope.newInterface;
+                newInterface.response_parameter = JSON.parse(newInterface.response_parameter)
+                $scope.project.modules[modulesIndex].items[pageIndex].items.push(newInterface);
                 $scope.project.$save({id: id}, function() {
-                    $log.log(success);
+                    $log.log('success');
                 });
             }
 

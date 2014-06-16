@@ -30,7 +30,7 @@ exports.create = function (req, res) {
         return res.status(400).send(errors);
     }
 
-    project.save(function (err, project) {
+    project.save(function (err,project) {
         if (err) {
             switch (err.code) {
                 default:
@@ -47,11 +47,11 @@ exports.create = function (req, res) {
 exports.addModules = function (req, res) {
     var modules = req.body.modules;
     var projectId = req.params.id;
-    Project.update({_id: projectId}, {modules: modules}, function (err, numberAffected, project) {
+    Project.commit({_id: projectId}, {modules: modules},null, function (err, numberAffected, project) {
         if (err) {
             switch (err.code) {
                 default:
-                    res.status(400).send('error!');
+                    res.send(400, 'error!');
             }
         } else {
             res.send(project);
@@ -118,6 +118,7 @@ exports.fetchOne = function (req, res) {
     var projectId = req.params.id;
 
     Project.findOne({_id: projectId}, function (err, project) {
+
         if (err) {
             switch (err.code) {
                 default:
@@ -167,6 +168,7 @@ exports.del = function (req, res) {
 exports.save2File = function (req, res) {
     var projectId = req.params.id;
     Project.update({_id: projectId}, {isSaveFile: 1}, function (err, rows) {
+
         if (err) {
             switch (err.code) {
                 default:
@@ -254,6 +256,109 @@ exports.changeVersion = function (req, res) {
             //var now = Date.now();
             Project.update({_id: objectId}, {version: version, modules: modules}, function (err, rows) {
                 if (err) {
+
+                    res.status(400);
+                    res.send("err!");
+                }
+
+                res.status(200);
+                res.send('success');
+            });
+        });
+    }
+}
+
+exports.save2File = function(req,res){
+    var projectId = req.params.id;
+    Project.update({_id:projectId},{isSaveFile:1},function(err,rows){
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(400).send(err.message);
+            }
+            return res.status(400);
+        }
+
+        res.status(200);
+        res.jsonp({success: '归档成功!'});
+    });
+}
+
+/**
+ * 查看某个版本的具体内容
+ * @param req
+ * @param res
+ */
+exports.queryVersion = function(req,res){
+    var objectName = 'project',
+        //objectId = req.body.objectId;
+         objectId = req.params.id;
+
+    CommitLog.find({objectName:objectName,objectId:objectId},function(err,commitLogs){
+        if(err){
+            res.status(400);
+            res.send("err!");
+            return;
+        }
+
+        res.status(200);
+        res.send(commitLogs);
+    });
+}
+
+/**
+ * 查看某个版本的信息
+ * @param req
+ * @param res
+ */
+exports.viewVersion = function(req,res){
+    var objectName = 'project',
+        version = req.params.versionId,
+        objectId = req.params.id;
+
+    CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
+        if(err){
+            res.status(400);
+            res.send("err!");
+            return;
+        }
+
+        var objectData = commitLog.objectData;
+
+        if(objectName == "project"){
+            Project.findOne({_id:objectId},function(err,project){
+                project.modules=objectData;
+                project.version = version;
+                res.status(200);
+                res.send(project);
+                return;
+            });
+        }
+    });
+}
+
+/**
+ * 变更version
+ * @param req
+ * @param res
+ */
+exports.changeVersion = function(req,res){
+    var objectName = "project",
+        version = req.params.versionId,
+        objectId = req.params.id;
+    if(objectName == 'project'){
+        CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
+            if(err){
+                res.status(400);
+                res.send("err!");
+                return;
+            }
+
+            var modules = commitLog.objectData.modules;
+            //objectData.version = version;
+            //var now = Date.now();
+            Project.update({_id:objectId},{version:version,modules:modules},function(err,rows){
+                if(err){
                     res.status(400);
                     res.send("err!");
                 }

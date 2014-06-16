@@ -1,38 +1,34 @@
 <div class="portal-view fade in" ng-controller="ProjectsController">
-    <div>
-        <!-- 创建组织和项目 S -->
-        <div class="btn-group">
-            <button class="btn btn-default" ng-click="createProjectModal()">创建项目</button>
-        </div>
-    </div>
-
-    <ul class="project-category">
-
-        <!-- 个人项目 S -->
-        <li class="project-category-item personal">
-            <header class="project-category-header">
-                <div class="project-category-title">个人项目</div>
-                <hr>
-            </header>
-            <ul class="projects clearfix organization-null">
-                <li class="project active-project card pull-left" ng-repeat="project in projects track by $index" ng-click="ProjectDetail(project._id)" style="background-image:url(https://mailimg.teambition.com/logos/cover-media.jpg)">
-                    <div class="project-info">
-                        <div>
-                            <div class="edit-set pull-right">
-                                <a class="glyphicon glyphicon-pencil"></a>
-                                <a class="glyphicon glyphicon-star-empty"></a>
-                            </div>
-                            <img ngSrc="{{project.logo}}" alt=""/>
-                            <h3 class="project-name">{{project.name}}</h3>
-                        </div>
-                        <p class="project-desc">{{project.desc}}</p>
-                        <p class="project-id">{{project._id}}</p>
-                        <p class="project-id">{{project.__v}}</p>
-                    </div>
-                </li>
-            </ul>
+  <ul class="project-category">
+    <!-- 个人项目 S -->
+    <li class="project-category-item personal">
+      <header class="project-category-header">
+        <div class="project-category-title">个人项目</div>
+        <hr>
+      </header>
+      <ul class="projects clearfix organization-null">
+        <li class="project active-project card pull-left" ng-repeat="project in projects track by $index"
+            ng-click="ProjectDetail(project._id)"
+            style="background-image:url(https://mailimg.teambition.com/logos/cover-media.jpg)">
+          <div class="project-info">
+            <div>
+              <div class="edit-set pull-right">
+                <a class="glyphicon glyphicon-pencil"></a>
+                <a class="glyphicon glyphicon-star-empty"></a>
+              </div>
+              <img ngSrc="{{project.logo}}" alt=""/>
+              <h3 class="project-name">{{project.name}}</h3>
+            </div>
+            <p class="project-desc">{{project.desc}}</p>
+            <p class="project-id">{{project._id}}</p>
+            <p class="project-id">{{project.__v}}</p>
+          </div>
         </li>
-        <!-- 个人项目 E -->
-
-    </ul>
+        <li class="project active-project card pull-left">
+          <a class="btn-create-project" ng-click="createProjectModal()">创建项目</a>
+        </li>
+      </ul>
+    </li>
+    <!-- 个人项目 E -->
+  </ul>
 </div>
