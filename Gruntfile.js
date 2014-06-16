@@ -89,11 +89,13 @@ module.exports = function(grunt) {
                 require: 'server.js'
             },
             src: ['test/mocha/**/*.js']
-//            ,'test/mocha/**/**/*.js']
         },
         env: {
+            production: {
+                NODE_ENV: 'production'
+            },
             test: {
-                NODE_ENV: 'test'
+                NODE_ENV: 'production'
             }
         },
         karma: {
