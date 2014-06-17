@@ -6,7 +6,6 @@ module.exports = function(grunt) {
         require('time-grunt')(grunt);
     }
 
-    // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         assets: grunt.file.readJSON('server/config/assets.json'),
@@ -91,9 +90,6 @@ module.exports = function(grunt) {
             src: ['test/mocha/**/*.js']
         },
         env: {
-            production: {
-                NODE_ENV: 'production'
-            },
             test: {
                 NODE_ENV: 'production'
             }
@@ -105,20 +101,20 @@ module.exports = function(grunt) {
         }
     });
 
-    //Load NPM tasks
+    // Load NPM tasks
     require('load-grunt-tasks')(grunt);
 
-    //Making grunt default to force in order not to break the project.
+    // Making grunt default to force in order not to break the project.
     grunt.option('force', true);
 
-    //Default task(s).
+    // Default task(s).
     if (process.env.NODE_ENV === 'production') {
         grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
     } else {
         grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
     }
 
-    //Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest'/*, 'karma:unit'*/]);
+    // Test task.
+    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
 };
