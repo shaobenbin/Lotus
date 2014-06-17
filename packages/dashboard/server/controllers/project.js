@@ -194,7 +194,7 @@ exports.queryVersion = function (req, res) {
     CommitLog.find({objectName: objectName, objectId: objectId}, function (err, commitLogs) {
         if (err) {
             res.status(400);
-            res.send("err!");
+            res.send('err!');
             return;
         }
 
@@ -216,13 +216,13 @@ exports.viewVersion = function (req, res) {
     CommitLog.findOne({objectName: objectName, objectId: objectId, version: version}, function (err, commitLog) {
         if (err) {
             res.status(400);
-            res.send("err!");
+            res.send('err!');
             return;
         }
 
         var objectData = commitLog.objectData;
 
-        if (objectName == "project") {
+        if (objectName == 'project') {
             Project.findOne({_id: objectId}, function (err, project) {
                 project.modules = objectData;
                 project.version = version;
@@ -240,14 +240,14 @@ exports.viewVersion = function (req, res) {
  * @param res
  */
 exports.changeVersion = function (req, res) {
-    var objectName = "project",
+    var objectName = 'project',
         version = req.params.versionId,
         objectId = req.params.id;
     if (objectName == 'project') {
         CommitLog.findOne({objectName: objectName, objectId: objectId, version: version}, function (err, commitLog) {
             if (err) {
                 res.status(400);
-                res.send("err!");
+                res.send('err!');
                 return;
             }
 
@@ -258,7 +258,7 @@ exports.changeVersion = function (req, res) {
                 if (err) {
 
                     res.status(400);
-                    res.send("err!");
+                    res.send('err!');
                 }
 
                 res.status(200);
@@ -297,7 +297,7 @@ exports.queryVersion = function(req,res){
     CommitLog.find({objectName:objectName,objectId:objectId},function(err,commitLogs){
         if(err){
             res.status(400);
-            res.send("err!");
+            res.send('err!');
             return;
         }
 
@@ -319,13 +319,13 @@ exports.viewVersion = function(req,res){
     CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
         if(err){
             res.status(400);
-            res.send("err!");
+            res.send('err!');
             return;
         }
 
         var objectData = commitLog.objectData;
 
-        if(objectName == "project"){
+        if(objectName == 'project'){
             Project.findOne({_id:objectId},function(err,project){
                 project.modules=objectData;
                 project.version = version;
@@ -343,14 +343,14 @@ exports.viewVersion = function(req,res){
  * @param res
  */
 exports.changeVersion = function(req,res){
-    var objectName = "project",
+    var objectName = 'project',
         version = req.params.versionId,
         objectId = req.params.id;
     if(objectName == 'project'){
         CommitLog.findOne({objectName:objectName,objectId:objectId,version:version},function(err,commitLog){
             if(err){
                 res.status(400);
-                res.send("err!");
+                res.send('err!');
                 return;
             }
 
@@ -360,7 +360,7 @@ exports.changeVersion = function(req,res){
             Project.update({_id:objectId},{version:version,modules:modules},function(err,rows){
                 if(err){
                     res.status(400);
-                    res.send("err!");
+                    res.send('err!');
                 }
 
                 res.status(200);
@@ -369,45 +369,3 @@ exports.changeVersion = function(req,res){
         });
     }
 }
-
-///**
-// * Delete an project
-// */
-//exports.destroy = function(req, res) {
-//    var project = req.project;
-//
-//    project.remove(function(err) {
-//        if(err) {
-//            return res.send('users/signup', {
-//                error: err.errors,
-//                project: project
-//            });
-//        } else {
-//            res.jsonp(project);
-//        }
-//    })
-//}
-//
-///**
-// * Show an project
-// */
-//exports.show = function(req, res) {
-//    res.jsonp(req.project)
-//}
-//
-///**
-// * List of Projects
-// */
-//exports.all = function(req, res) {
-//    var username = req.user.username;
-//
-//    Project.find({member: username}, function (err, projects) {
-//        if (err) {
-//            res.render('error', {
-//                status: 500
-//            })
-//        } else {
-//            res.jsonp(projects);
-//        }
-//    });
-//}

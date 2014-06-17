@@ -47,7 +47,7 @@ var CommitLogSchema = new Schema({
 
 mongoose.model('CommitLog', CommitLogSchema);
 
-CommitLogSchema.pre("save",function(next){
+CommitLogSchema.pre('save',function(next){
     var self = this;
     this.model('CommitLog').find().where('version').gt(0).limit(1)
         .sort('-version').exec(function(err, checkin){

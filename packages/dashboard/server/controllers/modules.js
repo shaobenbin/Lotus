@@ -17,8 +17,7 @@ exports.save = function (req, res) {
             }
             return res.status(400);
         } else {
-            res.status(200);
-            return res.json("success");
+            return res.send('success');
         }
     });
 };
@@ -41,7 +40,6 @@ exports.fetch = function (req, res) {
             }
             return res.status(400);
         } else {
-            res.status(200);
             return res.send(modules);
         }
     });
@@ -64,7 +62,6 @@ exports.fetchOfVersion = function (req, res) {
             }
             return res.status(400);
         } else {
-            res.status(200);
             return res.send(module);
         }
     });

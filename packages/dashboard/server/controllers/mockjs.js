@@ -82,20 +82,20 @@ exports.save = function (req, res) {
         desc: 'dd',
         projectId: '333',
         version: '222',
-        author: "ben",
-        type: "aa",
+        author: 'ben',
+        type: 'aa',
         items: [
             {
                 name: 'sasf',
-                template: "aasjdf",
-                type: "jkd",
+                template: 'aasjdf',
+                type: 'jkd',
                 items: [
                     {
                         name: 'sdf',
                         desc: 'ssasa',
                         type: 'd',
                         request_type: 'c',
-                        request_url: "lkul",
+                        request_url: 'lkul',
                         map_url: 'bulul',
                         request_parameter: {
 
@@ -120,7 +120,6 @@ exports.save = function (req, res) {
     var modules = new Modules(dd);
 
     modules.save(function (err) {
-        res.status(200);
-        res.send("success");
+        res.send('success');
     });
 }

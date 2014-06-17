@@ -60,4 +60,3 @@ OrganizationSchema.pre('save', function(next) {
         }
     });
 });
-

@@ -60,12 +60,10 @@ exports.create = function (req, res) {
 exports.fetchByOwner = function (req, res) {
     var user_name = req.user.username;
 
-    Organization.find({"owner":user_name},function(err,result){
+    Organization.find({'owner':user_name},function(err,result){
         if(err){
             return res.status(400);
         }
-
-        res.status(200);
         res.jsonp(result);
     })
 }
