@@ -76,6 +76,8 @@
   },
   "devDependencies": {
     "assetmanager": "^0.1.1",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
     "grunt-karma": "^0.6.2",
     "grunt-mocha-test": "latest",
     "gulp": "^3.6.2",

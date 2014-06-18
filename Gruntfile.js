@@ -9,6 +9,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         assets: grunt.file.readJSON('server/config/assets.json'),
+        clean: ["public/build/css", "public/build/js"],
         watch: {
             js: {
                 files: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js'],
@@ -60,6 +61,16 @@ module.exports = function(grunt) {
                 files: '<%= assets.css %>'
             }
         },
+        copy: {
+            main: {
+                expand: true,
+                cwd: 'public/system/assets/fonts/',
+                src: '**',
+                dest: 'public/build/fonts/',
+                flatten: true,
+                filter: 'isFile',
+            }
+        },
         nodemon: {
             dev: {
                 script: 'server.js',
@@ -109,7 +120,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     if (process.env.NODE_ENV === 'production') {
-        grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
+        grunt.registerTask('default', ['clean', 'jshint', 'csslint', 'cssmin', 'copy', 'uglify', 'concurrent']);
     } else {
         grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
     }
