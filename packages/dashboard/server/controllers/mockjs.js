@@ -25,7 +25,8 @@ exports.generateData = function (req, res) {
                 default:
                     res.send(400, 'Please fill all the required fields');
             }
-            return res.status(400);
+            res.status(200).send({code:4004,result:{errorMsg:'undefined error!'}});
+            return;
         }
 
         var modules = project.modules;
@@ -40,17 +41,25 @@ exports.generateData = function (req, res) {
                         var response_parameter = subItem.response_parameter;
                         console.log(response_parameter);
                         var rule = MockUtil.preMock(response_parameter);
-                        console.log(rule);
-
+                        if(!rule){
+                            res.status(200).send({code:4004,result:{errorMsg:'error response parameter!'}});
+                            return;
+                        }
                         var mockData = MockUtil.mock(rule);
-                        res.send(mockData);
+                        if(!mockData){
+                            res.status(200).send({code:4004,result:{errorMsg:'error rule!'}});
+                            return;
+                        }
+                        res.status(200);
+                        res.send({code:1001,result:mockData});
                         return;
                     }
                 }
             }
         }
 
-        res.send(400, 'not request url match!');
+        res.status(200).send({code:4004,result:{errorMsg:'not find action!'}});
+
     });
 }
 
