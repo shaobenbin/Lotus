@@ -3,8 +3,9 @@
   <div class="project-info row">
     <div class="col-md-12">
       <div class="project-profile pull-left">
-        <span class="project-name">项目名称：{{project.name}}</span>
-        <span class="project-desc">项目描述：{{project.desc}}</span>
+        <p class="project-id">项目编号：{{project._id}}</p>
+        <p class="project-name">项目名称：{{project.name}}</p>
+        <p class="project-desc">项目描述：{{project.desc}}</p>
       </div>
       <div class="toolbar pull-right">
         <span title="编辑" class="glyphicon glyphicon-check">编辑</span>
@@ -60,10 +61,10 @@
                 <li class="listLi row" ng-repeat="subitem in item.items track by $index">
                   <div class="col-md-12">
                     <div class="project-module-profile pull-left">
-                      <span class="title">{{subitem.name}}</span>
-                      <span>{{subitem.desc}}</span>
-                      <div>{{subitem.request_url}}</div>
-                      <div>{{subitem.response_parameter}}</div>
+                      <p>接口名称：{{subitem.name}}</p>
+                      <p>接口描述：{{subitem.desc}}</p>
+                      <p>接口描述：{{subitem.request_url}}</p>
+                      <div>接口定义：{{subitem.response_parameter}}</div>
                     </div>
                     <div class="toolbar pull-right">
                       <span title="编辑" class="glyphicon glyphicon-check">编辑</span>
