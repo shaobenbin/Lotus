@@ -69,7 +69,15 @@ module.exports = function(grunt) {
                 dest: 'public/build/fonts/',
                 flatten: true,
                 filter: 'isFile',
-            }
+            },
+            bootstrap: {
+                expand: true,
+                cwd: 'public/system/lib/bootstrap/dist/fonts/',
+                src: '**',
+                dest: 'public/build/fonts/',
+                flatten: true,
+                filter: 'isFile',
+            },
         },
         nodemon: {
             dev: {
